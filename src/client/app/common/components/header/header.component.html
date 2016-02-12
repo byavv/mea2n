@@ -1,0 +1,45 @@
+<header class="container">
+    <div class="navbar navbar-default navbar-fixed-top app-header">
+        <div class="header-container center-block">
+            <div class="navbar-header">
+                <a [routerLink]="['Home']" class="navbar-brand">MEA(2)N</a>
+                <button class="btn btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="glyphicon glyphicon-collapse-down"></span>
+                </button>
+            </div>
+            <div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right" *ngIf="!isAuthenticated">
+                        <li>
+                            <a [routerLink]="['./Auth','Signup']" class="headerButton">Sign Up</a>
+                        </li>
+                        <li class="divider-vertical"></li>
+                        <li>
+                            <a [routerLink]="['./Auth','Signin']" class="headerButton">Sign In</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" *ngIf="isAuthenticated">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" class="headerButton">
+                                <span>Settings</span> <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a [routerLink]="['./User']" class="headerButton">Personal data</a>
+                                </li>
+                                <li>
+                                    <a [routerLink]="['./User','Account']" class="headerButton">Account</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" (click)="signOut()" class="headerButton signoutButton">
+                                <span>Signout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

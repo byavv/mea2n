@@ -1,0 +1,22 @@
+{
+    "name": "mea2n",   
+    "description": "MEAN stack (Angular2)",
+    "main": "",
+    "authors": [
+        "Aksenchyk <slav_30@yahoo.com>"       
+    ],
+    "license": "MIT",
+    "homepage": "",
+    "moduleType": [],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "font-awesome": "^4.4.0",
+        "bootstrap": "^3.3.6"
+    }
+}

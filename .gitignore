@@ -1,0 +1,10 @@
+/node_modules
+.editorconfig
+/typings
+/.vscode
+npm-debug.log
+/dist
+/test/test.spec.js
+config1.json
+/src/client/vendor
+/coverage

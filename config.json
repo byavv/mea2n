@@ -1,0 +1,24 @@
+{
+    "appName": "MEA2N starter",
+    "github": {
+        "clientID": "GITHUB CLIENT ID",
+        "clientSecret": "GITHUB CLIENT SECRET"
+    },
+    "jwtAuth": {
+        "access_expiration_time": 360,
+        "refresh_expiration_time": 360000,
+        "secret": "my super secret word"
+    },
+    "mailer": {
+        "from": "MY APP NAME",
+        "options": {
+            "host": "smtp.gmail.com",
+            "port": 465,
+            "secure": true,
+            "auth": {
+                "user": "YOUR EMAIL ADDRESS",
+                "pass": "YOUR EMAIL PASSWORD"
+            }
+        }
+    }
+}

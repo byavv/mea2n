@@ -1,0 +1,109 @@
+@error: #a3000a;
+@default-form-control-border: #d3d3d3;
+@default-form-control-background: #fff;
+
+
+.login-form-container {
+  box-shadow: rgba(0,0,0,0.05) 0 1px 3px;
+  border: 1px solid #eaeaea;
+  border-top-color: #eee;
+  border-bottom-color: #e5e5e5;
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+.child-view-container{
+  .login-form-container();
+  margin-top: 0px;
+  padding: 30px 30px;
+}
+
+.form-group {
+   .form-control {
+    -webkit-transition: border ease 0.3s;
+    -moz-transition: border ease 0.3s;
+    -o-transition: border ease 0.3s;
+    transition: border ease 0.3s;
+    box-sizing: border-box;
+    font-size: 14px;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    background-color: @default-form-control-background;
+    border: 1px @default-form-control-border solid;    
+    height: 35px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    &:focus {
+      border-color: darken(@default-form-control-border, 15%);
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03) inset, 0 0 2px rgba(75, 75, 75, 0.2);
+      outline: thin dotted \9;
+    }
+  }
+  .control-label{
+     font-size: 12px;
+   }
+  &.has-error {
+    .form-control {
+      &:focus {
+        color: @error;
+        border-color: darken(@error, 5%);
+        box-shadow: 0 0 2px rgba(165, 0, 10, 0.4);
+      }
+      border-color: @error;
+    }
+    .control-label {
+      color: @error;
+    }
+  }
+}
+
+.btn.github-button {
+  border: 10px;
+  background: none;
+  box-sizing: border-box;
+  display: inline-block;
+  font: inherit;
+  font-family: Roboto, sans-serif;  
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;  
+  height: 40px;
+  width: 150px; 
+  overflow: hidden;
+  border-radius: 2px;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  background-color: #ffffff;
+  transform: translate3d(0, 0, 0); 
+}
+
+.btn.submit-form-button{
+    width: 100%;
+    border-radius: 1px; 
+    position: relative;
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+}
+
+.panel {
+  a {
+    &:active {
+      outline: none !important;
+    }
+    &:hover {
+      outline: none !important;
+    }
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+
+.error-messages {
+  font-size: 12px;
+  color: @error;
+}

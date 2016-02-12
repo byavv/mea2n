@@ -1,0 +1,13 @@
+{
+  "env": {
+    "NODE_ENV": "development"
+  }, 
+  "restartable": "rs", 
+  "verbose": false,
+  "execMap": {
+    "js": "node"
+  },  
+  "watch": [    
+    "/nan/*.*"   
+  ]
+}

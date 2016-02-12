@@ -1,0 +1,39 @@
+ .pswStatus {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    opacity: 0.5;
+  }
+  .pswStatus:hover {
+      opacity: 0.9;
+  }
+  .pswStatus > svg path {
+    stroke: #eeeeee;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: center;
+    -moz-transform-origin: center;
+  }
+  .psw {
+    position: relative;
+  }
+  .psw input[type="password"] {
+    padding-right: 30px;
+  }
+
+  .psw-danger  svg path {
+    animation: tada 0.5s linear both;
+    fill: #a3000a;
+  }
+  .psw-good  svg path {
+    animation: pulse 0.5s linear both;
+    fill: #EE7B00;
+  }
+  .psw-strong  svg path {
+    animation: pulse 0.5s linear both;
+    fill: #267c1d;
+  }
+  
