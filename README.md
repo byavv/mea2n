@@ -12,7 +12,7 @@
 
 ## Requirements
 * [MongoDb](https://www.mongodb.org/)
-* [Redis](http://redis.io/) ([Windows installer](https://github.com/rgl/redis/downloads))
+* [Redis](http://redis.io/)
 
 ## Quick start
 
@@ -21,7 +21,7 @@
 npm install --global gulp typescript typings webpack nodemon karma tsd node-gyp
 
 # clone the repo
-git clone https://github.com/ng-book/angular2-rxjs-chat.git 
+git clone https://github.com/byavv/mea2n.git 
 
 # change into the repo directory
 cd mea2n
