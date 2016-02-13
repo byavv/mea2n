@@ -4,6 +4,7 @@ import * as async from 'async';
 import * as _ from 'lodash';
 import * as path from "path";
 import * as express from 'express';
+import * as fs from 'fs';
 
 export default (User: any, tokenHelper: any)=>{
 
@@ -105,36 +106,20 @@ export default (User: any, tokenHelper: any)=>{
                     tokenHelper.create(user, (err, identityData) => {
                         if (err) {
                             return res.redirect(redirectURL || '/');
-                        }
-                        res.send(`
-                    <!doctype html>
-                        <html lang="en">
-                            <head>
-                                <meta charset="UTF-8">
-                                <title>Angular 2 Universal Starter</title>
-                                <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-                                <base href="/">
-                            </head>
-                            <body>
-                            <script type="text/javascript">
-                                var user = ${JSON.stringify(identityData)}     
-                                if(!!user){
-                                        window.focus();
-                                        if (window.opener && window.opener != window.self) {
-                                            window.opener.focus();
-                                            localStorage.setItem('authorizationData', JSON.stringify(user)); 
-                                            window.close();
-                                        } else {       
-                                            localStorage.setItem('authorizationData', JSON.stringify(user));
-                                            location.href = "/";      
-                                        }
-                                    } else {
-                                        location.href = "/error";//todo
-                                    }
-                                </script>
-                            </body>
-                        </html>                    
-                    `)
+                        }                       
+                        fs.readFile(path.join(__dirname, '../views/auth_success.html'), 'utf8', (err,data)=>{
+                            if (err) {
+                                return res.redirect(redirectURL || '/');
+                            }
+                            let jsrender = require("jsrender");                             
+                            jsrender.templates({ tmpl: data });
+                            var html = jsrender.render.tmpl({
+                                identityData: JSON.stringify(identityData)
+                            })
+                            res.writeHead(200, {"content-type": 'text/html'});                           
+                            res.write(html);
+                            res.end(); 
+                        });                  
                 });
             })(req, res, next);}
         }

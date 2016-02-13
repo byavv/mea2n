@@ -4,13 +4,16 @@ import * as express from 'express';
 import * as async from 'async';
 import * as _ from 'lodash';
 import * as nconf from "nconf";
+import * as path from "path";
+import * as fs from 'fs';
 
 export default (User: any, sendResetMail: any) => {
 
     return {
         /** 
          * Route callback for GET /api/reset/:token
-         * When user clicks on link in email to reset password.
+         * When user clicks on the link in email to reset password, 
+         * redirects to a new password page if link is still valid
          */
         validateResetToken: function(req, res) {
             User.findOne({
@@ -23,9 +26,9 @@ export default (User: any, sendResetMail: any) => {
                     return res.status(500).send();
                 };
                 if (user) {
-                    return res.redirect(`/password/reset/${req.params.token}`);
+                    return res.redirect(`/auth/reset/${req.params.token}`);
                 } else {
-                    return res.redirect('/password/error');
+                    return res.redirect('/auth/error');
                 }
             });
         },
@@ -136,7 +139,7 @@ export default (User: any, sendResetMail: any) => {
             }
         },
         /**
-         * Send email with instructions to reset password     * 
+         * Send email with instructions to reset password 
          */
         forgot: function(req: any, res: express.Response, next) {
             async.waterfall([
@@ -170,21 +173,19 @@ export default (User: any, sendResetMail: any) => {
                 },
                 // render email
                 (token, user, done) => {
-                    let content = `
-                       <!doctype html>
-                       <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <title>${nconf.get("appName")} password reset instructions</title>
-                        </head>
-                        <body>
-                            <p>Dear, <strong>${user.username}, </strong></p>
-                            <p><a href="http://${req.headers.host}/auth/reset/${token}">Click</a> here to reset your password</p>
-                            <p>and follow instructions</p>
-                        </body>
-                       </html>
-                       `
-                    done(null, content, user);
+                    fs.readFile(path.join(__dirname, '../views/reset_email.html'), 'utf8', (err, data) => {
+                        if (err) {
+                            done(err);
+                        }
+                        let jsrender = require("jsrender");
+                        jsrender.templates({ tmpl: data });
+                        var html = jsrender.render.tmpl({
+                            username: user.username,
+                            host: req.headers.host,
+                            token: token
+                        })
+                        done(null, html, user);
+                    });
                 },
                 // send it
                 (emailContent, user, done) => {
@@ -206,13 +207,15 @@ export default (User: any, sendResetMail: any) => {
         }, 
         /**
          * Change user password using reset password form
+         * middlewaer for /api/resetpassword
          */
-        resetForgotPassword: function(req, res) {
-            let { newPassword, token } = req.body;
-            if (!!newPassword && !!token) {
-                User.findOne({ "resetData.token": token }, (err, user) => {
+        setNewPassword: function(req, res) {
+            let { password, token } = req.body;
+            console.log(password, token)
+            if (!!password && !!token) {
+                User.findOne({ "resetData.token": token.toString() }, (err, user) => {
                     if (!err && user) {
-                        user.password = newPassword;
+                        user.password = password;
                         user.resetData = undefined;
                         user.save(function(err) {
                             if (err) {

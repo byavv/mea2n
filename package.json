@@ -96,6 +96,7 @@
     "express-webpack-assets": "0.0.2",
     "foreman": "1.4.1",
     "jsonwebtoken": "^5.5.4",
+    "jsrender": "^0.9.72",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lodash": "^3.10.1",

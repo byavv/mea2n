@@ -40,7 +40,7 @@ export default function(app: express.Application) {
     }), _apiCtrl.updateAccount);
 
     app.route('/api/forgot').post(_apiCtrl.forgot);
-    app.route('/api/resetpassword/').post(_apiCtrl.resetForgotPassword);
+    app.route('/api/resetpassword/').post(_apiCtrl.setNewPassword);
     app.route('/api/reset/:token').get(_apiCtrl.validateResetToken);
     /**
      * Local authentication api
