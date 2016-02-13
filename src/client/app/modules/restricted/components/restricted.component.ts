@@ -12,8 +12,7 @@ import {PermissionService} from '../../../common/services/services';
 })
 export class RestrictedComponent {
     constructor(private permission: PermissionService) { }
-    routerOnActivate() {
-        console.log("")
+    routerOnActivate() {       
        this.permission.isAuthorized(["user"])
     }
 }
