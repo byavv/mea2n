@@ -21,15 +21,12 @@ gulp.task('test:server', ["set_test", "compile:tests"], () => {
         .pipe($.mocha({
             reporter: 'spec'
         }))
-        .on('error', (err) => {
-            $.util.log($.util.colors.bgRed('ERROR:'), $.util.colors.red(err.message));
-            $.util.log('Stack:', $.util.colors.red(err.stack));
+        .on('error', (err) => {          
             mochaError = err;
         })
         .on('end', () => {
             if (mochaError) {
-                $.util.log($.util.colors.bgRed('ERROR:'), $.util.colors.red(mochaError.message));
-                $.util.log('Stack:', $.util.colors.red(mochaError.stack));
+                $.util.log($.util.colors.bgRed('ERROR:'), $.util.colors.red(mochaError.message));               
                 process.exit(1);
             }
             $.util.log($.util.colors.white.bgGreen.bold('INFO:'), 'Mocha completed');
