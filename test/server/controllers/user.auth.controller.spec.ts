@@ -179,12 +179,14 @@ describe("User authentication controller unit tests", () => {
         it("Should check authorization success", (done) => {
             request(app)
                 .post('/me')
-                .send({ roles: ["user"] })              
-                .expect((err, res) => {
-                    expect(res.body.status).to.be.equal(200);
-                    expect(res.body.text).to.be.equal("OK");
+                .send({ roles: ["user"] })
+                .expect(200)              
+                .end((err, res) => {
+                    expect(res.status).to.be.equal(200);
+                    expect(res.text).to.be.equal("OK");
                     expect(revokeStub.called).to.be.equal(true);
-                }).end(() => done());
+                    done();
+                });
         });
         it("Should check authorization fail (check if user admin)", (done) => {
             request(app)
