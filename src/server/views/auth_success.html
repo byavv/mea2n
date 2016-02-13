@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>github authentication</title>       
+        <base href="/">
+    </head>
+    <body>
+        <script type="text/javascript">
+            var identityData = {{:identityData}};     
+            if(!!identityData){
+                window.focus();
+                if (window.opener && window.opener != window.self) {
+                    window.opener.focus();
+                    localStorage.setItem('authorizationData', JSON.stringify(identityData)); 
+                    window.close();
+                } else {       
+                    localStorage.setItem('authorizationData', JSON.stringify(identityData));
+                    location.href = "/";      
+                }
+            }else{
+                location.href = "/error";
+            }
+        </script>
+    </body>
+</html>
