@@ -61,7 +61,7 @@ describe("User api controller tests", () => {
                 .end((err, res) => {
                     expect(res.status).to.be.equal(302);
                     expect(findOneStub.called).to.be.equal(true);
-                    expect(res.header['location']).to.be.equal("/password/reset/fake_token_from_email");
+                    expect(res.header['location']).to.be.equal("/auth/reset/fake_token_from_email");
                     done();
                 });
         });
@@ -85,7 +85,7 @@ describe("User api controller tests", () => {
                 .end((err, res) => {
                     expect(res.status).to.be.equal(302);
                     expect(findOneStub.called).to.be.equal(true);
-                    expect(res.header['location']).to.be.equal("/password/error");
+                    expect(res.header['location']).to.be.equal("/auth/error");
                     done();
                 });
         });
