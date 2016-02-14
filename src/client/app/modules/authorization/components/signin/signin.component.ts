@@ -4,6 +4,7 @@ import { Router, ROUTER_DIRECTIVES, OnActivate} from 'angular2/router';
 import {ServerResponseHandler, IdentityService, Storage} from '../../../../common/services/services';
 import {AuthApiService} from '../../services/authApi.service';
 import {Alert} from '../../../../common/components/alert/alert.component';
+
 @Component({
     selector: 'signin',
     template: require('./signin.component.html'),
@@ -31,7 +32,7 @@ export class SignInComponent implements OnActivate {
         );
     }
 
-    routerOnActivate() {      
+    routerOnActivate() {
         if (this.identityService.user.isAuthenticated()) {
             this.router.navigate(['/Home']);
         }

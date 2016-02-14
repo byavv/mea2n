@@ -19,13 +19,12 @@ import {APP_DIRECTIVES} from '../../../../common/directives/directives';
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]   
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]
 })
 export class SignUpComponent implements OnActivate {
     submitted: boolean = false;
     signUpForm: ControlGroup;
     error: string;
-    password1: string;
     formData: any;
     constructor(builder: FormBuilder,
         private authService: AuthApiService,
