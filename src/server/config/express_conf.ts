@@ -7,18 +7,22 @@ import * as cookieParser from "cookie-parser";
 import * as nconf from "nconf";
 import * as session from "express-session";
 import * as methodOverride from "method-override";
+import {ensureSsl} from "../middleware";
 import {ng2engine} from "angular2-universal-preview";
 
 export function configureExpress(app: express.Express) {
-
+    if (nconf.get("NODE_ENV") === "production") {
+        app.use(ensureSsl);
+    }
     app.use(require("serve-favicon")(path.join(__dirname, "../views/favicon.ico")));
     app.engine(".html", ng2engine);
     app.set("views", path.join(__dirname, "../views"));
     app.set("view engine", "html");
     app.use(cookieParser());
-    if(nconf.get("NODE_ENV") === "development"){
+    if (nconf.get("NODE_ENV") === "development") {
         app.use(morgan("tiny"));
-    }    
+    }
+
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     app.use(methodOverride("_method"));

@@ -15,7 +15,7 @@ export class Header {
     constructor(private identity: IdentityService, private localStorage: Storage, private router: Router) {
         identity.identitySubject
             .subscribe((user) => {
-                this.isAuthenticated = user.isAuthenticated()
+                this.isAuthenticated = user.isAuthenticated();
             });
         this.router.subscribe((next) => {
             var instr = router.recognize(next).then((instruction: Instruction) => {

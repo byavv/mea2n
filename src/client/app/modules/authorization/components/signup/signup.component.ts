@@ -11,7 +11,7 @@ import {Http, Headers} from 'angular2/http';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from 'angular2/router';
 import {SecureInput} from '../../../../common/components/securedInput/securedInput.component';
 import {Alert} from '../../../../common/components/alert/alert.component'
-import {ServerResponseHandler, IdentityService} from '../../../../common/services/services';
+import {ServerResponseHandler, IdentityService, Storage} from '../../../../common/services/services';
 import {AuthApiService} from '../../services/authApi.service';
 import * as appValidators from '../../../../lib/formValidators';
 import {APP_DIRECTIVES} from '../../../../common/directives/directives';
@@ -19,20 +19,19 @@ import {APP_DIRECTIVES} from '../../../../common/directives/directives';
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES],
-    providers: [AuthApiService, IdentityService, ServerResponseHandler]
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]
 })
 export class SignUpComponent implements OnActivate {
     submitted: boolean = false;
     signUpForm: ControlGroup;
     error: string;
-    password1: string;
     formData: any;
     constructor(builder: FormBuilder,
         private authService: AuthApiService,
         private identityService: IdentityService,
         private responseHandler: ServerResponseHandler,
-        private router: Router) {
+        private router: Router,
+        private storage: Storage) {
         this.signUpForm = builder.group({
             username: ["", Validators.required],
             email: ["", Validators.compose([
@@ -64,8 +63,13 @@ export class SignUpComponent implements OnActivate {
 
     onSuccess(data) {
         if (data && data.token) {
-            this.identityService.update(data);
-            this.router.navigate(['/Home']);
+            this.storage.setItem("authorizationData", JSON.stringify(data))
+                .then(() => {
+                    this.identityService.update(data);
+                    this.router.navigate(['/Home']);
+                });
+        } else {
+            this.error = "Unexpected server error";
         }
     }
 

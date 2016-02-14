@@ -1,8 +1,8 @@
 {
     "appName": "MEA2N starter",
     "github": {
-        "clientID": "GITHUB CLIENT ID",
-        "clientSecret": "GITHUB CLIENT SECRET"
+        "clientID": "xxxxxxxxxxxxxxxxxxxx",
+        "clientSecret": "xxxxxxxxxxxxxxxxxxxxxxx"
     },
     "jwtAuth": {
         "access_expiration_time": 360,
@@ -16,8 +16,8 @@
             "port": 465,
             "secure": true,
             "auth": {
-                "user": "YOUR EMAIL ADDRESS",
-                "pass": "YOUR EMAIL PASSWORD"
+                "user": "xxxxxxxxxxxxxxxxx",
+                "pass": "xxxxxxxxxxxxxxxxx"
             }
         }
     }
