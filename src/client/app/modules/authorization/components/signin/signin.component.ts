@@ -31,7 +31,7 @@ export class SignInComponent implements OnActivate {
         );
     }
 
-    routerOnActivate() {
+    routerOnActivate() {      
         if (this.identityService.user.isAuthenticated()) {
             this.router.navigate(['/Home']);
         }
@@ -39,9 +39,9 @@ export class SignInComponent implements OnActivate {
 
     onSuccess(data) {
         if (data && data.token) {
-            this.identityService.update(data);
             this.storage.setItem("authorizationData", JSON.stringify(data))
                 .then(() => {
+                    this.identityService.update(data);
                     this.router.navigate(['/Home']);
                 });
         } else {

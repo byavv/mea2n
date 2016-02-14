@@ -101,14 +101,16 @@ export default (User: any, tokenHelper: any)=>{
             return function(req, res: express.Response, next) {
                 passport.authenticate(strategy, (err, user, redirectURL) => {
                     if (err || !user) {
+                        console.error(err)
                         return res.send("Unexpected server error");
                     }
                     tokenHelper.create(user, (err, identityData) => {
-                        if (err) {
+                        if (err) {                            
                             return res.redirect(redirectURL || '/');
                         }                       
                         fs.readFile(path.join(__dirname, '../views/auth_success.html'), 'utf8', (err,data)=>{
                             if (err) {
+                                console.error(err)
                                 return res.redirect(redirectURL || '/');
                             }
                             let jsrender = require("jsrender");                             
