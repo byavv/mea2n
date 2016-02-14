@@ -10,6 +10,8 @@ import {redisconfig} from "./config/redis_conf";
 import * as nconf from "nconf";
 import * as chalk from "chalk";
 import * as path from "path";
+import * as fs from "fs";
+import * as https from "https";
 
 let env = process.env.NODE_ENV || "development";
 let app = express();
@@ -21,10 +23,24 @@ config
     .then(() => {
         configureExpress(app);
         configurePassport();
-        configureRoutes(app);
-        let port = nconf.get("httpPort") || 3000;
-        app.listen(port);
-        console.info(chalk.green(`Server started on http port:  ${port}`));
+        configureRoutes(app);        
+        // node dist/server/server.js --SECURED 
+        // if you need run locally in https mode
+        if (nconf.get("SECURED")) {
+            const privateKey = fs.readFileSync(path.join(__dirname, './config/ssl/testkey.pem'), 'utf8');
+            const certificate = fs.readFileSync(path.join(__dirname, './config/ssl/testcert.pem'), 'utf8');
+            const httpsPort = nconf.get("httpsPort") || 443;
+            const httpsServer = https.createServer({
+                key: privateKey,
+                cert: certificate
+            }, app);
+            httpsServer.listen(httpsPort);
+            console.info(chalk.green(`Server started on https port:  ${httpsPort}`));
+        } else {            
+            let httpPort = nconf.get("httpPort") || 3000;
+            app.listen(httpPort);
+            console.info(chalk.green(`Server started on http port:  ${httpPort}`));
+        }
     })
     .catch((error) => {
         console.error(chalk.bgRed.white(`Crush ${error}`));
