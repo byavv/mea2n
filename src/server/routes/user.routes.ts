@@ -58,8 +58,8 @@ export default function(app: express.Application) {
     /**
      * Github authentication routes 
      */
-    app.route('/auth/github').get(passport.authenticate('github', {
+    app.route('/external/github').get(passport.authenticate('github', {
         scope: ['user:email']
     }));
-    app.route('/auth/github/callback').get(_authCtrl.oauthCallback('github'));
+    app.route('/external/github/callback').get(_authCtrl.oauthCallback('github'));
 };
