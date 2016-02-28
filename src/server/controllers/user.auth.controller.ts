@@ -99,13 +99,14 @@ export default (User: any, tokenHelper: any)=>{
          */
         oauthCallback: function(strategy) {
             return function(req, res: express.Response, next) {
-                passport.authenticate(strategy, (err, user, redirectURL) => {
+                passport.authenticate(strategy, (err, user, redirectURL) => {                    
                     if (err || !user) {
                         console.error(err)
                         return res.send("Unexpected server error");
                     }
                     tokenHelper.create(user, (err, identityData) => {
-                        if (err) {                            
+                        if (err) {
+                            console.error(err)                            
                             return res.redirect(redirectURL || '/');
                         }                       
                         fs.readFile(path.join(__dirname, '../views/auth_success.html'), 'utf8', (err,data)=>{
@@ -114,7 +115,7 @@ export default (User: any, tokenHelper: any)=>{
                                 return res.redirect(redirectURL || '/');
                             }
                             let jsrender = require("jsrender");                             
-                            jsrender.templates({ tmpl: data });
+                            jsrender.templates({ tmpl: data });                            
                             var html = jsrender.render.tmpl({
                                 identityData: JSON.stringify(identityData)
                             })
