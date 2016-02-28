@@ -137,7 +137,7 @@ var test_server_config = {
         cache: false
     },
     entry: {
-        test: ['./serverSpeck.bundle.js']
+        test: ['./serverSpec.bundle.js']
     },
     output: {
         path: __dirname + '/test',
