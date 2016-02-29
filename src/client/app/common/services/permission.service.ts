@@ -1,7 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {ExtHttp} from './authHttp.service';
-import * as Rx from 'rxjs';
-//import {PromiseWrapper} from "angular2/src/facade/async";
+
 @Injectable()
 export class PermissionService {
     private _http: ExtHttp;
