@@ -1,4 +1,4 @@
-# MEAN Stack (angular2.b6)
+# MEAN Stack (angular2.b7)
 
 ####Rewrite of [NG1](https://github.com/byavv/ng-mean) version to Angular2
 
@@ -6,7 +6,7 @@
 
 #### What we've got here
 
-* Complete typescript environment.
+* Typescript environment.
 * JWT-based authentication (naive, but ready to scale).
 * Server rendering via [angular-universal](https://github.com/angular/universal).
 
@@ -40,7 +40,7 @@ gulp
 
 1. Register [new github application](https://github.com/settings/applications/new) and fill secrets in 
 "config.js" to get github authentication functionality.
-2. Fill sender email data in "config.js" to send reset password emails.
+2. Fill sender email data in "config.js" to be able to send reset password emails.
 
 ## Build
 ```sh
