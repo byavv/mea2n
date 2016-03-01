@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import * as Rx from 'rxjs';
+import {Observable} from 'rxjs';
 import {ExtHttp} from '../../../common/services/authHttp.service';
 
 @Injectable()
@@ -8,22 +8,22 @@ export class UserApiService {
     constructor(http: ExtHttp) {
         this._http = http;
     }
-    public updateUserAccount(accountData): Rx.Observable<any> {
+    public updateUserAccount(accountData): Observable<any> {
         return this._http
             .post("/api/updateaccount", JSON.stringify({ account: accountData }))
             .map(res => res.json())
     }
-    public getUserAccount(): Rx.Observable<any> {
+    public getUserAccount(): Observable<any> {
         return this._http
             .post("/api/account", null)
             .map(res => res.json())
     }
-    public updateProfile(userProfile: any): Rx.Observable<any> {
+    public updateProfile(userProfile: any): Observable<any> {
         return this._http
             .put("/api/profile", JSON.stringify({ profile: userProfile }))
             .map(res => res.json());
     }
-    public getProfile(): Rx.Observable<any> {
+    public getProfile(): Observable<any> {
         return this._http
             .post("/api/profile", null)
             .map(res => res.json());

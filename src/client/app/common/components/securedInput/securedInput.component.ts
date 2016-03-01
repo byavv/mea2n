@@ -9,7 +9,6 @@ CORE_DIRECTIVES
 import {Component, Self, EventEmitter, ElementRef} from 'angular2/core';
 import * as browser from "angular2/platform/browser";
 import {Ruler, Rectangle} from "angular2/src/platform/browser/ruler";
-import * as Rx from 'rxjs';
 import {RestrictInput} from "../../directives/directives";
 
 @Component({

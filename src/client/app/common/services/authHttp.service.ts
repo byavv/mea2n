@@ -2,13 +2,13 @@ import {Injectable} from 'angular2/core';
 import {ServerResponseHandler} from "./serverResponseHandler.service";
 import {IdentityService} from "./identity.service"
 import {Http, Headers, RequestOptions, RequestOptionsArgs, Response, RequestMethod, Request} from 'angular2/http';
-import * as Rx from 'rxjs';
+import {Subject, Observable} from 'rxjs';
 
 export enum Action { QueryStart, QueryStop };
 
 @Injectable()
 export class ExtHttp {
-    process: Rx.Subject<any> = new Rx.Subject<any>();
+    process: Subject<any> = new Subject<any>();
     constructor(private _http: Http,
         private serverHandler: ServerResponseHandler,
         private identity: IdentityService) {
@@ -42,14 +42,14 @@ export class ExtHttp {
         return this._request(RequestMethod.Delete, url, null, options);
     }
 
-    private _request(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Rx.Observable<any> {
+    private _request(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Observable<any> {
         let requestOptions = new RequestOptions(Object.assign({
             method: method,
             url: url,
             body: body,
             headers: this._createAuthHeaders()
         }, options));
-        return Rx.Observable.create((observer) => {
+        return Observable.create((observer) => {
             this.process.next(Action.QueryStart);
             this._http.request(new Request(requestOptions))
                 .finally(() => {

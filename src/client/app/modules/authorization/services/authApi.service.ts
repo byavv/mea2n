@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
 import {ExtHttp} from '../../../common/services/services';
-import * as Rx from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthApiService {
@@ -11,25 +11,25 @@ export class AuthApiService {
         this._http = exHttp;
     }
 
-    public signUp(userData): Rx.Observable<Response> {
+    public signUp(userData): Observable<Response> {
         return this._http
             .post("/auth/signup", JSON.stringify(userData))
             .map(res => res.json());
     }
 
-    public signIn(userData): Rx.Observable<any> {
+    public signIn(userData): Observable<any> {
         return this._http
             .post("/auth/signin", JSON.stringify(userData))
             .map(res => res.json());
     }
 
-    public forgotPassword(email: string): Rx.Observable<any> {
+    public forgotPassword(email: string): Observable<any> {
         return this._http
             .post("/api/forgot", JSON.stringify({ email: email }))
             .map(res => res.json());
     }
 
-    public setNewPassword(password: string, token: string): Rx.Observable<any> {
+    public setNewPassword(password: string, token: string): Observable<any> {
         return this._http
             .post("/api/resetpassword", JSON.stringify({ password: password, token: token }))
             .map(res => res.json());

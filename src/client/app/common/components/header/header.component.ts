@@ -13,7 +13,7 @@ export class Header {
     isAuthenticated: boolean = false;
     shouldRedirect: boolean;
     constructor(private identity: IdentityService, private localStorage: Storage, private router: Router) {
-        identity.identitySubject
+        identity.identityDispatch
             .subscribe((user) => {
                 this.isAuthenticated = user.isAuthenticated();
             });
