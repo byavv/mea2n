@@ -20,17 +20,14 @@ import {APP_SERVICES_PROVIDERS} from "./common/services/services";
             </router-outlet>
         </section>        
     </div>
-  `,
-  host:{
-      '(window:storage)': "onStorage($event)" // leave here untill IE can hanle
-  }
+  ` 
 })
 @RouteConfig([
     { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/restricted', name: 'Restricted', component: RestrictedComponent, data: { secured: true } },
     { path: '/user/...', name: 'User', component: UserProfileModule, data: { secured: true } },
     { path: '/auth/...', name: 'Auth', component: AuthorizationModule, data: { secured: true } },
-    { path: '/**', redirectTo: ['Home'] }// todo err page
+    { path: '/**', redirectTo: ['Home'] }
 ])
 export class App {
     constructor(private identity: IdentityService, private renderer: Renderer, router: Router) {
@@ -39,8 +36,5 @@ export class App {
             identity.update(identityData);
             router.navigate(['Home']);
         });
-    }
-    onStorage(event){
-        
-    }
+    }  
 }
