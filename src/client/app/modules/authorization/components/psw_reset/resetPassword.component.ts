@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup, Control, Validators} from 'angular2/common';
+import {FORM_DIRECTIVES, ControlGroup, Control, Validators} from 'angular2/common';
 import { Router, ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 import {ServerResponseHandler} from '../../../../common/services/services';
 import {AuthApiService} from '../../services/authApi.service';
@@ -9,7 +9,7 @@ import {Alert} from '../../../../common/components/alert/alert.component';
 @Component({
     selector: 'forgot',
     template: require('./resetPassword.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, SecureInput, Alert, ROUTER_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, SecureInput, Alert, ROUTER_DIRECTIVES]
 })
 export class ResetPasswordComponent {
     error: string;

@@ -1,4 +1,4 @@
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/common';
+import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/common';
 import {Component, OnInit, AfterViewInit} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import {emailValidator, passwordLongerThen6IfExists} from '../../../../lib/formValidators';
@@ -11,7 +11,7 @@ import {Alert} from '../../../../common/components/alert/alert.component';
 @Component({
     selector: 'account',
     template: require('./account.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, Alert, SecureInput]
+    directives: [FORM_DIRECTIVES, Alert, SecureInput]
 })
 export class AccountComponent implements OnInit, AfterViewInit{
     submitted: boolean = false;
