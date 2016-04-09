@@ -1,4 +1,4 @@
-# MEAN Stack (angular2.b8)
+# MEAN Stack (angular2.b14)
 
 ####Rewrite of [NG1](https://github.com/byavv/ng-mean) version to Angular2
 

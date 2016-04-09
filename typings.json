@@ -6,7 +6,6 @@
         "body-parser": "github:DefinitelyTyped/DefinitelyTyped/body-parser/body-parser.d.ts#16134c168d021351acb1673ee9659644fc58c424",
         "chalk": "github:DefinitelyTyped/DefinitelyTyped/chalk/chalk.d.ts#16134c168d021351acb1673ee9659644fc58c424",
         "cookie-parser": "github:DefinitelyTyped/DefinitelyTyped/cookie-parser/cookie-parser.d.ts#16134c168d021351acb1673ee9659644fc58c424",
-        "es6-promise": "github:DefinitelyTyped/DefinitelyTyped/es6-promise/es6-promise.d.ts#830e8ebd9ef137d039d5c7ede24a421f08595f83",
         "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
         "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#36c6ce86fb64bafb28ec95dc78c6b98228b45c8d",
         "express-jwt": "github:DefinitelyTyped/DefinitelyTyped/express-jwt/express-jwt.d.ts#2cb8fd4638231efd24929f99d56372bdb57d337b",
@@ -23,8 +22,7 @@
         "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
         "passport": "github:DefinitelyTyped/DefinitelyTyped/passport/passport.d.ts#16134c168d021351acb1673ee9659644fc58c424",
         "redis": "github:DefinitelyTyped/DefinitelyTyped/redis/redis.d.ts#fa04c80f4a889613b96cb4f283848c61a9f64233",
-        "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#36c6ce86fb64bafb28ec95dc78c6b98228b45c8d",
-        "zone.js": "github:DefinitelyTyped/DefinitelyTyped/zone.js/zone.js.d.ts#b923a5aaf013ac84c566f27ba6b5843211981c7a"
+        "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#36c6ce86fb64bafb28ec95dc78c6b98228b45c8d"       
     },
     "ambientDevDependencies": {
         "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#290a1d7ee6c04ccf64c6fcfdf39d935baa91d55b",

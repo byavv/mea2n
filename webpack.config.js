@@ -36,20 +36,30 @@ var common = {
                 },
             }
         ],
-    }
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(true)
+    ]
 };
 
 var client_in_browser_ui_config = {
     target: 'web',
     entry: {
-        main_ui: ['./src/client/client_browser.ts'],
-        assets: ['./src/client/client_assets.ts']
+        main_ui: ['./src/client/bootstrap.ts'],
+        assets: ['./src/client/assets.ts']
     },
     output: {
         path: __dirname + '/dist/client',
         filename: "[name].js",
         pathinfo: false,
         publicPath: '/dist/client/',
+    },
+    node: {
+        global: true,
+        __dirname: true,
+        __filename: true,
+        process: true,
+        Buffer: false
     },
     plugins: [
         new webpack.DllReferencePlugin({
@@ -75,24 +85,11 @@ var client_in_browser_ui_config = {
     ]
 };
 
-//var client_in_webworker_config = {/*soon*/}
 
 var vendors_config = {
     target: 'web',
     entry: {
-        vendors: [
-            "es6-shim",
-            "es6-promise",
-            "reflect-metadata",
-            "zone.js/dist/zone-microtask",
-            "zone.js/dist/long-stack-trace-zone",
-            "rxjs",
-            "angular2/core",
-            "angular2/router",
-            "angular2/common",
-            "angular2/http",
-            "lodash"
-        ]
+        vendors: ['./src/client/vendor.ts']
     },
     output: {
         path: __dirname + '/dist/client',
@@ -123,7 +120,6 @@ var server_config = {
     externals: [nodeExternals()],
     node: {
         global: true,
-        self: true,
         __dirname: true,
         __filename: true,
         process: true,
@@ -157,6 +153,7 @@ var test_server_config = {
     }
 }
 
+
 var test_client_config = {
     resolve: {
         cache: false
@@ -180,7 +177,7 @@ var test_client_config = {
         ]
     },
     stats: { colors: true, reasons: true },
-    debug: false,    
+    debug: false,
     // we need this due to problems with es6-shim
     node: {
         global: 'window',
@@ -192,7 +189,7 @@ var test_client_config = {
     }
 }
 
-module.exports = function (env) {
+module.exports = function(env) {
     var environment = env || process.env.NODE_ENV || "development";
     var productionTools = {
         plugins: [
@@ -210,7 +207,7 @@ module.exports = function (env) {
         debug: true,
         plugins: [new webpack.HotModuleReplacementPlugin()]
     }
-    
+
     var client, server, vendors, test, test_server;
     if (environment === 'development') {
         client = webpackMerge(common, client_in_browser_ui_config, devTools);
