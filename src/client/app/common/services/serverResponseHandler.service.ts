@@ -27,7 +27,7 @@ export class ServerResponseHandler {
     }
 
     public handle500(): any {
-        //todo: notify user with error popup dialog or smth else
+        //todo: notify user with an error popup dialog or smth else
     }
 
     private _getMessage(source, allowArrayResult = false) {

@@ -32,7 +32,7 @@ export class Storage {
             return PromiseWrapper.resolve("")
         }
     }
-    // Init storage by DOM object outside of server rendering
+    // Init storage by DOM object outside of the server rendering
     initStorage(storageBackend: StorageBackend) {
         this.storageBackend = storageBackend;
     }
