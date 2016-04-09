@@ -14,7 +14,7 @@ import {ServerResponseHandler, IdentityService, Storage} from '../../../../commo
 import {AuthApiService} from '../../services/authApi.service';
 import * as appValidators from '../../../../lib/formValidators';
 import {APP_DIRECTIVES} from '../../../../common/directives/directives';
-
+//[ngClass]="{active: isActive, disabled: isDisabled}"
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
