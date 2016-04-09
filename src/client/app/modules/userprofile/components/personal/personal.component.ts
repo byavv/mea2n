@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterViewInit} from 'angular2/core';
-import {CORE_DIRECTIVES, ControlGroup, Control, FORM_DIRECTIVES} from 'angular2/common';
+import {ControlGroup, Control, FORM_DIRECTIVES} from 'angular2/common';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {ServerResponseHandler} from '../../../../common/services/services';
@@ -10,7 +10,7 @@ import {Alert} from '../../../../common/components/alert/alert.component';
 @Component({
     selector: 'personal',
     template: require('./personal.component.html'),
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FORM_DIRECTIVES, DateSelector, Alert]
+    directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, DateSelector, Alert]
 })
 export class PersonalComponent implements OnInit, AfterViewInit {
     personal = {

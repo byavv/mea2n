@@ -1,4 +1,4 @@
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup, FormBuilder} from 'angular2/common';
+import {FORM_DIRECTIVES, ControlGroup, FormBuilder} from 'angular2/common';
 import {Component, Injector} from 'angular2/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate} from 'angular2/router';
 import {ServerResponseHandler, IdentityService, Storage} from '../../../../common/services/services';
@@ -8,7 +8,7 @@ import {Alert} from '../../../../common/components/alert/alert.component';
 @Component({
     selector: 'signin',
     template: require('./signin.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES]
 })
 export class SignInComponent implements OnActivate {
     signInForm: ControlGroup;

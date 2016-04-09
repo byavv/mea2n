@@ -1,11 +1,10 @@
 'use strict';
-import * as passport from 'passport';
-import * as nconf from 'nconf';
-import * as express from 'express';
-import * as mongoose from 'mongoose';
+import * as passport from "passport";
+import * as nconf from "nconf";
+import * as express from "express";
+import * as mongoose from "mongoose";
 import tokenHelper from "../libs/jwt.util";
-import auth from "../controllers/user.auth.controller";
-import api from "../controllers/user.api.controller";
+import {authController, apiController} from "../controllers/";
 import {redisconfig} from "../config/redis_conf";
 import {sendResetMail} from "../libs/mail.helper";
 var jwt = require('express-jwt');
@@ -14,8 +13,8 @@ var User = mongoose.model("User");
 export default function(app: express.Application) {
     
     var _tokenHelper = tokenHelper(redisconfig.client);
-    var _authCtrl = auth(User, _tokenHelper);
-    var _apiCtrl = api(User, sendResetMail);    
+    var _authCtrl = authController(User, _tokenHelper);
+    var _apiCtrl = apiController(User, sendResetMail);    
     /**
      *  User profile api  
      */

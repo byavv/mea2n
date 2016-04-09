@@ -1,11 +1,10 @@
 import {
-CORE_DIRECTIVES,
-FORM_DIRECTIVES,
-FormBuilder,
-ControlGroup,
-Control,
-Validators,
-AbstractControl} from 'angular2/common';
+    FORM_DIRECTIVES,
+    FormBuilder,
+    ControlGroup,
+    Control,
+    Validators,
+    AbstractControl} from 'angular2/common';
 import {Component, OnInit} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from 'angular2/router';
@@ -15,11 +14,11 @@ import {ServerResponseHandler, IdentityService, Storage} from '../../../../commo
 import {AuthApiService} from '../../services/authApi.service';
 import * as appValidators from '../../../../lib/formValidators';
 import {APP_DIRECTIVES} from '../../../../common/directives/directives';
-
+//[ngClass]="{active: isActive, disabled: isDisabled}"
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]
 })
 export class SignUpComponent implements OnActivate {
     submitted: boolean = false;
@@ -50,7 +49,7 @@ export class SignUpComponent implements OnActivate {
         if (this.signUpForm.valid) {
             this.authService.signUp(value).subscribe(
                 data => this.onSuccess(data),
-                err  => this.onError(err)
+                err => this.onError(err)
             );
         }
     }

@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {FORM_DIRECTIVES} from "angular2/common";
 import {ServerResponseHandler} from '../../../../common/services/services';
 import {AuthApiService} from '../../services/authApi.service';
 import {Alert} from '../../../../common/components/alert/alert.component';
@@ -7,7 +7,7 @@ import {Alert} from '../../../../common/components/alert/alert.component';
 @Component({
     selector: 'forgot',
     template: require('./forgot.component.html'),
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, Alert],
+    directives: [FORM_DIRECTIVES, Alert],
     styles: [require('!raw!./style.less')]
 })
 export class ForgotComponent {

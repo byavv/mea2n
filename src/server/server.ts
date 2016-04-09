@@ -1,3 +1,4 @@
+import 'angular2-universal/polyfills';
 
 import * as express from "express";
 import {config} from "./config/config";
@@ -23,9 +24,9 @@ config
     .then(() => {
         configureExpress(app);
         configurePassport();
-        configureRoutes(app);        
+        configureRoutes(app);
         // node dist/server/server.js --SECURED 
-        // if you need run locally in https mode
+        // if you need to run locally in https mode
         if (nconf.get("SECURED")) {
             const privateKey = fs.readFileSync(path.join(__dirname, './config/ssl/testkey.pem'), 'utf8');
             const certificate = fs.readFileSync(path.join(__dirname, './config/ssl/testcert.pem'), 'utf8');
@@ -36,7 +37,7 @@ config
             }, app);
             httpsServer.listen(httpsPort);
             console.info(chalk.green(`Server started on https port:  ${httpsPort}`));
-        } else {            
+        } else {
             let httpPort = nconf.get("httpPort") || 3000;
             app.listen(httpPort);
             console.info(chalk.green(`Server started on http port:  ${httpPort}`));

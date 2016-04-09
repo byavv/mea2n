@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Renderer, Optional, Attribute} from 'angular2/core';
-
+import {StringWrapper} from 'angular2/src/facade/lang';
 @Directive({
     selector: '[restrictInput]',
     inputs: [
@@ -7,7 +7,7 @@ import {Directive, ElementRef, Renderer, Optional, Attribute} from 'angular2/cor
     ],
     host: {
         '(keypress)': 'onKeydown($event)',
-        '(paste)': 'onPast($event)',
+        '(paste)': 'onPaste($event)',
     }
 })
 export class RestrictInput {
@@ -23,10 +23,10 @@ export class RestrictInput {
     nopaste: boolean = true;
     constructor(private element: ElementRef, private renderer: Renderer, @Optional() @Attribute('nopaste') nopaste?: string) {
         this.nopaste = nopaste != null;
-        this.regex = '[A-Za-z0-9]';
+        this.regex = '[A-Za-z0-9]'; //default
     }
     onKeydown(event: any) {
-        if (this.expression && !this.expression.test(String.fromCharCode(event.keyCode))) {
+        if (this.expression && !this.expression.test(StringWrapper.fromCharCode(event.keyCode))) {
             this.renderer.setElementStyle(this.element.nativeElement, "background", "indianred")
             setTimeout(() => {
                 this.renderer.setElementStyle(this.element.nativeElement, "background", "white")
@@ -34,7 +34,7 @@ export class RestrictInput {
             event.preventDefault();
         }
     }
-    onPast(event) {
+    onPaste(event) {
         if (this.nopaste) {
             event.preventDefault();
         }
