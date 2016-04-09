@@ -3,7 +3,7 @@ import * as express from "express";
 import * as chai from "chai";
 import * as request from "supertest";
 import {configureExpress} from "../../../src/server/config/express_conf";
-import auth from "../../../src/server/controllers/user.auth.controller";
+import {authController} from "../../../src/server/controllers";
 var assert = chai.assert;
 var expect = chai.expect;
 describe("User authentication controller unit tests", () => {
@@ -30,7 +30,7 @@ describe("User authentication controller unit tests", () => {
             create: createStub,
             revoke: revokeStub
         }
-        controller = auth(User, JwtUtilStub);
+        controller = authController(User, JwtUtilStub);
     })
     before(() => {
         app = express();

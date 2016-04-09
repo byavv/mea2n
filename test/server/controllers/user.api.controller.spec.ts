@@ -3,7 +3,7 @@ import * as express from "express";
 import * as chai from "chai";
 import * as request from "supertest";
 import {configureExpress} from "../../../src/server/config/express_conf";
-import apicontroller from "../../../src/server/controllers/user.api.controller";
+import {apiController} from "../../../src/server/controllers";
 var assert = chai.assert;
 var expect = chai.expect;
 
@@ -32,7 +32,7 @@ describe("User api controller tests", () => {
         };
         mockUser.findOne = findOneStub;
         sendResetMailstub = sinon.stub().yields(null);
-        controller = apicontroller(mockUser, sendResetMailstub)
+        controller = apiController(mockUser, sendResetMailstub)
         done();
     })
     beforeEach(() => {
