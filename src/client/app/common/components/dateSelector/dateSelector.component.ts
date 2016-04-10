@@ -1,12 +1,12 @@
 import {Component, AfterViewInit, Output, EventEmitter } from 'angular2/core';
 import * as appValidators from '../../../lib/formValidators';
-import {FORM_DIRECTIVES, Control, ControlGroup, NgControl, ControlValueAccessor, Validators, CORE_DIRECTIVES} from 'angular2/common';
+import {FORM_DIRECTIVES, Control, ControlGroup, NgControl, ControlValueAccessor, Validators} from 'angular2/common';
+
 @Component({
     selector: 'dateSelector[ngControl]',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [FORM_DIRECTIVES],
     template: require("./dateSelector.component.html")
 })
-
 export class DateSelector implements ControlValueAccessor {
     date: any = {
         day: 1,
@@ -16,6 +16,20 @@ export class DateSelector implements ControlValueAccessor {
     dateForm: ControlGroup;
     onChange: EventEmitter<any> = new EventEmitter();
     onTouched: any;
+    months: any[] = [
+        { name: "January", value: 0 },
+        { name: "Fabuary", value: 1 },
+        { name: "March", value: 2 },
+        { name: "April", value: 3 },
+        { name: "May", value: 4 },
+        { name: "June", value: 5 },
+        { name: "July", value: 6 },
+        { name: "August", value: 7 },
+        { name: "September", value: 8 },
+        { name: "October", value: 9 },
+        { name: "November", value: 10 },
+        { name: "December", value: 11 }
+    ];
     constructor(private cd: NgControl) {
         cd.valueAccessor = this;
         this.dateForm = new ControlGroup({
@@ -41,10 +55,7 @@ export class DateSelector implements ControlValueAccessor {
         this.date.day = dat.getDate();
         this.date.month = dat.getMonth();
         this.date.year = dat.getFullYear();
-    }
-    /**
-     * ControlValueAccessor
-     */
+    }    
     writeValue(date) {
         this._updateValue(date);
     }
