@@ -1,8 +1,7 @@
 <div class="row">
-    <form [ngFormModel]="dateForm" no-validate>
+    <div [ngFormModel]="dateForm">
         <div class="col-md-3">
-            <!-- <div class="form-group" [class.has-error]="!dateForm.controls['day'].valid">-->
-            <div class="form-group" >
+            <div class="form-group" [ngClass]="{ 'has-error' :!dateForm.controls['day'].valid}">
                 <label for="day">Day</label>
                 <input class="form-control" min="1" max="31" #day="ngForm" name="day" type="number" ngControl="day" [(ngModel)]="date.day"
                 id="day">
@@ -14,25 +13,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="month">Month</label>
-                <select class="form-control" name="month" id="month" ngControl="month" [(ngModel)]="date.month">
-                    <option value="0">January</option>
-                    <option value="1">Fabuary</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5">June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
+                <select name="month" id="month" class="form-control" ngControl="month" [(ngModel)]="date.month">
+                    <option *ngFor="#month of months" [value]="month.value">{{month.name}}</option>
                 </select>
             </div>
         </div>
         <div class="col-md-3">
-            <!--  <div class="form-group" [class.has-error]="!dateForm.controls['year'].valid">-->
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{ 'has-error' :!dateForm.controls['year'].valid}">
                 <label for="year">Year</label>
                 <input class="form-control" min="1915" #year="ngForm" [(ngModel)]="date.year" ngControl="year" name="year" type="number"
                 id="year">
@@ -41,5 +28,5 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
