@@ -1,5 +1,5 @@
 <div class="psw">
-    <form [ngFormModel]="form" no-validate>
+    <div [ngFormModel]="form" no-validate>
         <input type="password" [id]="id" class="form-control" placeholder="password"
             ngControl="password" 
             [(ngModel)]="password"
@@ -15,5 +15,5 @@
 			</svg>		
 		</span>
         <ng-content></ng-content>
-    </form>
+    </div>
 </div>
