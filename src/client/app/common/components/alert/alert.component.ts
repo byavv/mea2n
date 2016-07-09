@@ -1,9 +1,7 @@
-import {Component, Output, EventEmitter} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component, EventEmitter} from '@angular/core';
 
 @Component({
-    selector: 'alert',
-    directives: [CORE_DIRECTIVES],
+    selector: 'alert',   
     template: require("./alert.component.html"),
     inputs: ["type"],
     outputs: ["onclose"],

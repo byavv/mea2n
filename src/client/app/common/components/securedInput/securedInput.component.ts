@@ -5,11 +5,9 @@ ControlValueAccessor,
 NgControl,
 Control,
 CORE_DIRECTIVES
-} from 'angular2/common';
-import {Component, Self, EventEmitter, ElementRef} from 'angular2/core';
-import * as browser from "angular2/platform/browser";
-import {Ruler, Rectangle} from "angular2/src/platform/browser/ruler";
-import {RestrictInput} from "../../directives/directives";
+} from '@angular/common';
+import {Component, Self, EventEmitter, ElementRef} from '@angular/core';
+import {RestrictInput} from "../../directives";
 
 @Component({
     selector: 'securedinput',

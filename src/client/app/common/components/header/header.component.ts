@@ -1,7 +1,7 @@
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router, Instruction} from 'angular2/router';
-import {IdentityService, Storage} from '../../services/services';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router, NavigationStart} from '@angular/router';
+import {IdentityService, Storage} from '../../services';
 
 @Component({
     selector: 'app-header',
@@ -17,11 +17,15 @@ export class Header {
             .subscribe((user) => {
                 this.isAuthenticated = user.isAuthenticated();
             });
-        this.router.subscribe((next) => {
-            var instr = router.recognize(next).then((instruction: Instruction) => {
-                this.shouldRedirect = !!instruction.component.routeData.data["secured"];
+
+        this.router
+            .events
+            .subscribe((next) => {
+             
+                /*   var instr = router.recognize(next).then((instruction: Instruction) => {
+                       this.shouldRedirect = !!instruction.component.routeData.data["secured"];
+                   })*/
             })
-        })
     }
     signOut() {
         this.localStorage.removeItem("authorizationData");

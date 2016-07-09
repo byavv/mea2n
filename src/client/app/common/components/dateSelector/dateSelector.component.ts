@@ -1,6 +1,6 @@
-import {Component, AfterViewInit, Output, EventEmitter } from 'angular2/core';
+import {Component, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import * as appValidators from '../../../lib/formValidators';
-import {FORM_DIRECTIVES, Control, ControlGroup, NgControl, ControlValueAccessor, Validators} from 'angular2/common';
+import {FORM_DIRECTIVES, Control, ControlGroup, NgControl, ControlValueAccessor, Validators} from '@angular/common';
 
 @Component({
     selector: 'dateSelector[ngControl]',

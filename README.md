@@ -1,8 +1,4 @@
-# MEAN Stack (angular2.b14)
-
-####Rewrite of [NG1](https://github.com/byavv/ng-mean) version to Angular2
-
-> Work in progress! A lot of not resolved issues, needed to make it work as designed [#6374](https://github.com/angular/angular/issues/6374), [#4112](https://github.com/angular/angular/issues/4112)
+# MEAN (angular2.rc4)
 
 #### What we've got here
 

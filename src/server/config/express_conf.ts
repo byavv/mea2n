@@ -7,17 +7,17 @@ import * as cookieParser from "cookie-parser";
 import * as nconf from "nconf";
 import * as session from "express-session";
 import * as methodOverride from "method-override";
-import {ensureSsl} from "../middleware";
-import {expressEngine} from "angular2-universal";
+import { ensureSsl } from "../middleware";
+import { expressEngine } from "angular2-universal";
 
-export function configureExpress(app: express.Express) {
+export function configureExpress(app) {
     if (nconf.get("NODE_ENV") === "production") {
         app.use(ensureSsl);
     }
     app.use(require("serve-favicon")(path.join(__dirname, "../views/favicon.ico")));
 
     app.engine('.html', expressEngine);
-    app.set("views", path.join(__dirname, "../views"));
+    app.set("views", path.join(__dirname, "../../../build/client"));
     app.set('view engine', 'html');
    
     app.use(cookieParser());
@@ -29,7 +29,7 @@ export function configureExpress(app: express.Express) {
     app.use(bodyParser.json());
     app.use(methodOverride("_method"));
     app.use(passport.initialize());
-    app.use("/dist/", express.static(process.cwd() + "/dist/"));
+    app.use("/static/", express.static(process.cwd() + "/build/client"));
     app.use((err: any, req: express.Request, res: express.Response, next: Function) => {
         let code = 500,
             msg = { message: "Internal Server Error" };

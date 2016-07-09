@@ -1,39 +1,48 @@
-import {provide, Inject, OpaqueToken} from 'angular2/core';
-import {PromiseWrapper} from "angular2/src/facade/async";
+import {Inject, OpaqueToken, provide} from '@angular/core';
+import {LocalStorage} from 'angular2-universal';
+import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
 
-export interface StorageBackend {
+export const localStorageBackend = new OpaqueToken('localStorageBackend');
+
+export interface IStorageBackend {
     getItem(key: string): any;
-    setItem(key: string, value: any): any;
-    removeItem(key: string): any;
+    setItem(key: string, value: any): void;
+    removeItem(key: string): void;
 }
 
+
 export class Storage {
-    storageBackend: StorageBackend;
+    storageBackend: IStorageBackend;  
+
+    constructor( @Inject(localStorageBackend) storageBackend: IStorageBackend) {
+        this.storageBackend = storageBackend;     
+    }
+
     getItem(key) {
-        if (this.storageBackend) {
-            return PromiseWrapper.wrap(() => this.storageBackend.getItem(key))
-        } else {
-            return PromiseWrapper.resolve("")
-        }
+        return this.storageBackend.getItem(key);
     }
 
     setItem(key, value) {
-        if (this.storageBackend) {
-            return PromiseWrapper.wrap(() => this.storageBackend.setItem(key, value))
-        } else {
-            return PromiseWrapper.resolve("")
-        }
+        return this.storageBackend.setItem(key, value);
     }
 
     removeItem(key) {
-        if (this.storageBackend) {
-            return PromiseWrapper.wrap(() => this.storageBackend.removeItem(key))
-        } else {
-            return PromiseWrapper.resolve("")
-        }
+        return this.storageBackend.removeItem(key);
     }
-    // Init storage by DOM object outside of the server rendering
-    initStorage(storageBackend: StorageBackend) {
-        this.storageBackend = storageBackend;
+    initStorage(backend) {
+        this.storageBackend = backend;
     }
 }
+
+export const STORAGE_PROVIDERS = [
+    Storage,
+    provide(localStorageBackend, {
+        useFactory() {           
+            return getDOM().getGlobalEventTarget('window').localStorage || {
+                getItem: (key) => { return null },
+                setItem: (key, value) => { return null },
+                removeItem: (key) => { return null }
+            }
+        }
+    })
+];

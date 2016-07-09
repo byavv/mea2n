@@ -15,33 +15,38 @@ gulp.task("compile:tests", (done) => {
     var config = require("./webpack.config")().test_server
     webpack(config).run(onWebpackCompleted(done));
 });
+
 gulp.task('test:server', ["set_test", "compile:tests"], () => {
     var mochaError;
-    gulp.src(['./test/**/*.spec.js'], { read: false })
+    gulp.src(['./test/server/**/*.spec.js'], { read: false })
         .pipe($.mocha({
             reporter: 'spec'
         }))
-        .on('error', (err) => {          
+        .on('error', (err) => {
             mochaError = err;
         })
         .on('end', () => {
             if (mochaError) {
-                $.util.log($.util.colors.bgRed('ERROR:'), $.util.colors.red(mochaError.message));               
+                $.util.log($.util.colors.bgRed('ERROR:'), $.util.colors.red(mochaError.message));
                 process.exit(1);
             }
             $.util.log($.util.colors.white.bgGreen.bold('INFO:'), 'Mocha completed');
             process.exit();
         });
 });
+
 gulp.task("test", ['test:client'], (done) => {
     runSequence(['test:server'], done)
 });
+
 gulp.task("test:client", (done) => {
     startClientTests(true, done);
 });
+
 gulp.task("test:client:watch", (done) => {
     startClientTests(false, done);
 });
+
 gulp.task('test:e2e', () => {
     gulp.src([])
         .pipe($.angularProtractor({
@@ -55,38 +60,34 @@ gulp.task('test:e2e', () => {
         })
         .on('end', () => { });
 });
+
 gulp.task('clean:build', (done) => {
-    require('rimraf')('./dist', done);
+    require('rimraf')('./build', done);
 });
-gulp.task("images", () => {
-    return gulp.src("src/client/assets/images/*")
-        .pipe(gulp.dest("dist/images"));
-});
+
 gulp.task("build:server", (done) => {
-    var config = require("./webpack.config")().server
-    webpack(config).run(onWebpackCompleted(done));
+    var config = require("./webpack.config")();
+    webpack(config.server).run(onWebpackCompleted(done));
 });
-gulp.task("build:client", ["build:vendors"], (done) => {
-    var config = require("./webpack.config")().client
-    webpack(config).run(onWebpackCompleted(done));
+
+gulp.task("build:client", (done) => {
+    var config = require("./webpack.config")();    
+    webpack(config.client).run(onWebpackCompleted(done));
 });
-gulp.task("build:vendors", (done) => {
-    var config = require("./webpack.config")().vendors
-    webpack(config).run(onWebpackCompleted(done));
-});
+
 gulp.task("build", ["clean:build"], (done) => {
     runSequence(['build:server', 'build:client'], done)
 });
+
 gulp.task('default', () => {
     var nodemonRef;
+    var config = require("./webpack.config")();
     rx.Observable.create((observer) => {
-        var clientConfig = require("./webpack.config")().client;
-        var serverConfig = require("./webpack.config")().server;
-        webpack(clientConfig).watch(100, onWebpackCompleted((err) => {
+        webpack(config.client).watch(500, onWebpackCompleted((err) => {
             if (err) observer.error(err);
             observer.next();
         }));
-        webpack(serverConfig).watch(100, onWebpackCompleted((err) => {
+        webpack(config.server).watch(500, onWebpackCompleted((err) => {
             if (err) observer.error(err);
             observer.next();
         }));
@@ -96,7 +97,7 @@ gulp.task('default', () => {
             nodemonRef
                 ? nodemonRef.restart()
                 : nodemonRef = nodemon({
-                    script: path.join(__dirname, 'dist/server/server.js'),
+                    script: path.join(__dirname, 'build/server/server.js'),
                 });
         })
 });

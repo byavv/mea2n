@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Renderer, Optional, Attribute} from 'angular2/core';
-import {StringWrapper} from 'angular2/src/facade/lang';
+import { Directive, ElementRef, Renderer, Optional, Attribute } from '@angular/core';
+import { StringWrapper } from '@angular/compiler/src/facade/lang';
 @Directive({
     selector: '[restrictInput]',
     inputs: [

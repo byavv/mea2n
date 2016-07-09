@@ -1,28 +1,30 @@
 import 'angular2-universal/polyfills';
-import {bootstrap} from 'angular2/platform/browser'
-import {global} from 'angular2/src/facade/lang'
-import {ComponentRef} from 'angular2/core';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {FORM_PROVIDERS} from 'angular2/common';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {APP_SERVICES_PROVIDERS, IdentityService, Storage} from "./app/common/services/services";
-import {App} from './app/app';
-import {prebootComplete} from 'angular2-universal';
+import { provide, PLATFORM_DIRECTIVES, ComponentRef } from '@angular/core';
+import { Http } from '@angular/http';
+import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/common/services";
+import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+import {
+    TranslateLoader,
+    TranslateStaticLoader,
+    TranslateService
+} from "ng2-translate/ng2-translate";
+import { prebootComplete } from 'angular2-universal';
+import { bootstrap, enableProdMode, BROWSER_ROUTER_PROVIDERS, BROWSER_HTTP_PROVIDERS } from 'angular2-universal';
+
+import { App } from './app/app';
 
 const PROVIDERS = [
-    ...HTTP_PROVIDERS,
-    ...FORM_PROVIDERS,
-    ...ROUTER_PROVIDERS,
-    ...APP_SERVICES_PROVIDERS
+    ...BROWSER_HTTP_PROVIDERS,
+    ...BROWSER_ROUTER_PROVIDERS,
+    APP_ROUTER_PROVIDERS,
+    provide(TranslateLoader, {
+        useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
+        deps: [Http]
+    })
 ];
 
+enableProdMode();
+
 bootstrap(App, PROVIDERS)
-    .then((appRef: ComponentRef) => {
-        prebootComplete(appRef);
-        let storage: Storage = appRef.injector.get(Storage);
-        let identity: IdentityService = appRef.injector.get(IdentityService);
-        storage.initStorage(window.localStorage);
-        storage.getItem("authorizationData").then((value) => {
-            identity.update(JSON.parse(value));
-        })
-    }, error => console.log(error))
+    .then(prebootComplete)
+    .catch(console.error)
