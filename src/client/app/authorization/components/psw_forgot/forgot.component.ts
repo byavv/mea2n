@@ -8,7 +8,7 @@ import {Alert} from '../../../shared/components/alert/alert.component';
     selector: 'forgot',
     template: require('./forgot.component.html'),
     directives: [FORM_DIRECTIVES, Alert],
-    styles: [require('!raw!./style.less')]
+    styles: [require('./style.scss')]
 })
 export class ForgotComponent {
     error: string;

@@ -19,8 +19,7 @@ import '../assets/styles/main.scss';
             </div>        
         </div>
     </div>
-  ` ,
-    providers: [/*APP_SERVICES_PROVIDERS*/]
+  `     
 })
 export class App {
     constructor(private identity: IdentityService,

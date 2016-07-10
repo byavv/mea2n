@@ -79,7 +79,7 @@ gulp.task("build", ["clean:build"], (done) => {
     runSequence(['build:server', 'build:client'], done)
 });
 
-gulp.task('default', () => {
+gulp.task('default', ["clean:build"], () => {
     var nodemonRef;
     var config = require("./webpack.config")();
     rx.Observable.create((observer) => {
