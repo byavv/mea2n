@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FORM_DIRECTIVES, ControlGroup, Control, Validators } from '@angular/common';
-import { Router, ROUTER_DIRECTIVES, Params, ActivatedRoute } from '@angular/router';
+import { Router, ROUTER_DIRECTIVES,  ActivatedRoute } from '@angular/router';
 import { ServerResponseHandler } from '../../../shared/services';
 import { AuthApiService } from '../../services/authApi.service';
 import { Alert, SecureInput } from '../../../shared/components/';
@@ -18,8 +18,7 @@ export class ResetPasswordComponent {
     countdown: boolean;
     constructor(
         private authApiService: AuthApiService,
-        private route: ActivatedRoute,
-        private params: Params,//this.route.snapshot.params['id']
+        private route: ActivatedRoute,        
         private responseHandler: ServerResponseHandler,
         private router: Router) {
         this.passwordForm = new ControlGroup({
@@ -29,7 +28,8 @@ export class ResetPasswordComponent {
         })
     }
     onSubmit(formData) {
-        this.authApiService.setNewPassword(formData.password, this.params["token"])
+        /**/
+        this.authApiService.setNewPassword(formData.password, this.route.snapshot.params['token'])
             .subscribe(
             (success) => this.onSuccess(success),
             (err) => this.onError(err));

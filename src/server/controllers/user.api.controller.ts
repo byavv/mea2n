@@ -71,8 +71,8 @@ export function apiController(User: any, sendResetMail: any) {
                 }
                 var oldPsw = req.body.account.oldpassword;
                 if (user.authenticate(oldPsw)) {
-                    if (!!req.body.account.password) {
-                        user.password = req.body.account.password;
+                    if (!!req.body.account.newpassword) {
+                        user.password = req.body.account.newpassword;
                     } else {
                         user.password = oldPsw;
                     }
