@@ -1,4 +1,4 @@
-import { FORM_DIRECTIVES, ControlGroup, FormBuilder } from '@angular/common';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
 import { Component, Injector } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { ServerResponseHandler, IdentityService, Storage } from '../../../shared/services';
@@ -8,19 +8,19 @@ import { Alert } from '../../../shared/components';
 @Component({
     selector: 'signin',
     template: require('./signin.component.html'),
-    directives: [FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES],
+    directives: [REACTIVE_FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES],
     styles: [require("./signin.scss")]
 })
 export class SignInComponent {
-    signInForm: ControlGroup;
+    signInForm: FormGroup;
     error: string;
-    constructor(builder: FormBuilder,
+    constructor(fBuilder: FormBuilder,
         private router: Router,
         private authService: AuthApiService,
         private storage: Storage,
         private identity: IdentityService,
         private responseHandler: ServerResponseHandler) {
-        this.signInForm = builder.group({
+        this.signInForm = fBuilder.group({
             "username": [""],
             "password": [""]
         });

@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/shared/services";
 import { InertLink } from "./app/shared/directives";
 import { APP_ROUTER_PROVIDERS } from './app/routes';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 import {
     TranslateLoader,
@@ -25,7 +26,9 @@ const PROVIDERS = [
         useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
         deps: [Http]
     }),
-    provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true })
+    provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true }),
+    disableDeprecatedForms(),
+    provideForms(),
 ];
 
 enableProdMode();

@@ -1,34 +1,33 @@
 import { Component } from '@angular/core';
-import { FORM_DIRECTIVES, ControlGroup, Control, Validators } from '@angular/common';
-import { Router, ROUTER_DIRECTIVES,  ActivatedRoute } from '@angular/router';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
+import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { ServerResponseHandler } from '../../../shared/services';
 import { AuthApiService } from '../../services/authApi.service';
 import { Alert, SecureInput } from '../../../shared/components/';
+import { ShowError } from '../../../shared/directives';
 
 @Component({
     selector: 'forgot',
     template: require('./resetPassword.component.html'),
-    directives: [FORM_DIRECTIVES, SecureInput, Alert, ROUTER_DIRECTIVES]
+    directives: [REACTIVE_FORM_DIRECTIVES, SecureInput, Alert, ROUTER_DIRECTIVES, ShowError]
 })
 export class ResetPasswordComponent {
     error: string;
     info: string;
-    passwordForm: ControlGroup;
+    passwordForm: FormGroup;
     redirectTime: number = 5;
     countdown: boolean;
     constructor(
         private authApiService: AuthApiService,
-        private route: ActivatedRoute,        
+        private route: ActivatedRoute,
         private responseHandler: ServerResponseHandler,
+        private fBuilder: FormBuilder,
         private router: Router) {
-        this.passwordForm = new ControlGroup({
-            "password": new Control("", Validators.compose([
-                Validators.required, Validators.minLength(6)
-            ]))
-        })
+        this.passwordForm = fBuilder.group({
+            password: ["", Validators.compose([Validators.required, Validators.minLength(6)])]
+        });
     }
-    onSubmit(formData) {
-        /**/
+    onSubmit(formData) {      
         this.authApiService.setNewPassword(formData.password, this.route.snapshot.params['token'])
             .subscribe(
             (success) => this.onSuccess(success),

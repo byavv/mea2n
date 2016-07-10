@@ -1,6 +1,6 @@
 
-import {it, xit, describe, expect, afterEach,
-    beforeEach, async, inject, beforeEachProviders} from '@angular/core/testing';
+import { it, xit, describe, expect, afterEach,
+    beforeEach, async, inject, beforeEachProviders } from '@angular/core/testing';
 import {SignInComponent} from "../components/signin/signin.component";
 import {AuthApiService} from "../services/authApi.service";
 import {
@@ -8,19 +8,19 @@ import {
     APP_SERVICES_PROVIDERS,
     ServerResponseHandler}
 from '../../shared/services'
-import {setBaseTestProviders} from '@angular/core/testing';
+import { setBaseTestProviders } from '@angular/core/testing';
 
-import {PLATFORM_COMMON_PROVIDERS} from '@angular/core'
+import { PLATFORM_COMMON_PROVIDERS } from '@angular/core'
 import * as _ from 'lodash';
 import * as rx from "rxjs/Rx";
 
 import {App} from '../../app';
 
 
-import {provide, ApplicationRef, Component, PLATFORM_DIRECTIVES} from '@angular/core';
-import {FORM_PROVIDERS, FormBuilder} from '@angular/common';
+import {provide, ApplicationRef, Component, PLATFORM_DIRECTIVES } from '@angular/core';
+import { FORM_PROVIDERS, FormBuilder } from '@angular/common';
 import { Router } from "@angular/router";
-import {By} from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 
 import {
     ComponentFixture,

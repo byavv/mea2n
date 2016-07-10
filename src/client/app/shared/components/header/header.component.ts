@@ -1,4 +1,3 @@
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, NavigationStart, NavigationEnd, ActivatedRoute, PRIMARY_OUTLET } from '@angular/router';
 import { IdentityService, Storage } from '../../services';

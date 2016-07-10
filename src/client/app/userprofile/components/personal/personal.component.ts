@@ -1,18 +1,18 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {ControlGroup, Control, FORM_DIRECTIVES} from '@angular/common';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import {ServerResponseHandler} from '../../../shared/services';
-import {UserApiService} from '../../services/userApi.service';
-import {DateSelector} from '../../../shared/components/dateSelector/dateSelector.component';
-import {Alert} from '../../../shared/components/alert/alert.component';
+import { ServerResponseHandler } from '../../../shared/services';
+import { UserApiService } from '../../services/userApi.service';
+import { DateSelector, Alert } from '../../../shared/components';
+import { ShowError } from '../../../shared/directives';
 
 @Component({
     selector: 'personal',
     template: require('./personal.component.html'),
-    directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, DateSelector, Alert]
+    directives: [ROUTER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, DateSelector, Alert, ShowError]
 })
-export class PersonalComponent implements OnInit, AfterViewInit {
+export class PersonalComponent implements OnInit {
     personal = {
         name: "",
         birthday: "1/1/1990",
@@ -20,37 +20,35 @@ export class PersonalComponent implements OnInit, AfterViewInit {
     }
     error: string = null;
     info: string = null;
-    form: ControlGroup;
+    form: FormGroup;
     constructor(
         private apiService: UserApiService,
+        private fBuilder: FormBuilder,
         private responseHandler: ServerResponseHandler) {
-        this.form = new ControlGroup({
-            "birthday": new Control(""),
-            "name": new Control(""),
-            "address": new Control("")
+        this.form = fBuilder.group({
+            birthday: [""],
+            name: [""],
+            address: [""],
         });
     }
     ngOnInit() {
-        //this._getProfileData();
-    }
-    //temp untill #4112 is resolved
-    ngAfterViewInit(){
-         this._getProfileData();
-    }
-    _getProfileData() {
+        // wait a bit. this way is not implemented yet
+        // this.apiService.getProfile()
+        //        .subscribe(person => this.form.updateValue(person));
         this.apiService.getProfile()
-            .subscribe((data) => {                
+            .subscribe((data) => {
                 if (!!data)
                     Object.assign(this.personal, data);
             },
-            err  => this.onError(err))
+            err => this.onError(err))
     }
+
     onSubmit(value) {
         if (this.form.valid) {
             this.apiService.updateProfile(value)
                 .subscribe(
                 data => this.onSuccess(data),
-                err  => this.onError(err))
+                err => this.onError(err))
         }
     }
     onSuccess(data) {

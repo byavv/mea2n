@@ -1,16 +1,10 @@
-import {
-ControlGroup,
-FORM_DIRECTIVES,
-ControlValueAccessor,
-NgControl,
-Control
-} from '@angular/common';
-import { Component, Self, EventEmitter, ElementRef } from '@angular/core';
+import { NgControl, FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators, ControlValueAccessor } from '@angular/forms';
+import { Component, Self, Optional, EventEmitter, ElementRef } from '@angular/core';
 import { RestrictInput } from "../../directives";
 
 @Component({
     selector: 'securedinput',
-    directives: [FORM_DIRECTIVES, RestrictInput],
+    directives: [REACTIVE_FORM_DIRECTIVES, RestrictInput],
     template: require("./securedInput.component.html"),
     styles: [
         require('./style.scss')
@@ -23,13 +17,13 @@ export class SecureInput implements ControlValueAccessor {
     currentState: string = 'default';
     onChange: EventEmitter<any> = new EventEmitter();
     onTouched: EventEmitter<any> = new EventEmitter();
-    form: ControlGroup;
+    form: FormGroup;
     password: string = "";
 
-    constructor( @Self() private control: NgControl, private element: ElementRef) {
-        control.valueAccessor = this;
-        this.form = new ControlGroup({
-            password: new Control("")
+    constructor( @Self() @Optional() private control: NgControl, fBuilder: FormBuilder) {
+        if (control) control.valueAccessor = this;
+        this.form = fBuilder.group({
+            password: [""]
         });
         this.form.valueChanges
             .subscribe((val) => {
@@ -61,8 +55,8 @@ export class SecureInput implements ControlValueAccessor {
         if (status !== this.currentState) {
             this.currentState = status;
         }
-    }  
-  
+    }
+
     /**
      * ControlValueAccessor
      */

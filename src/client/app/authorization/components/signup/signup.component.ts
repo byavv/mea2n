@@ -1,31 +1,30 @@
-import {
-    FORM_DIRECTIVES,
-    FormBuilder,
-    ControlGroup,
-    Control,
-    Validators,
-    AbstractControl} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
-import {SecureInput} from '../../../shared/components/securedInput/securedInput.component';
-import {Alert} from '../../../shared/components/alert/alert.component'
-import {ServerResponseHandler, IdentityService, Storage} from '../../../shared/services';
-import {AuthApiService} from '../../services/authApi.service';
+import { SecureInput, Alert } from '../../../shared/components';
+import { ShowError } from '../../../shared/directives';
+
+import { ServerResponseHandler, IdentityService, Storage } from '../../../shared/services';
+import { AuthApiService } from '../../services/authApi.service';
 import * as appValidators from '../../../lib/formValidators';
-import {APP_DIRECTIVES} from '../../../shared/directives';
+import { APP_DIRECTIVES } from '../../../shared/directives';
 
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
-    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES],
+    directives: [REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES, ShowError],
     styles: [require("./signin.scss")]
 })
 export class SignUpComponent {
     submitted: boolean = false;
-    signUpForm: ControlGroup;
+    signUpForm: FormGroup;
     error: string;
-    formData: any;
+    formData: any = {
+        username: "",
+        email: "",
+        password: ""
+    };
     constructor(builder: FormBuilder,
         private authService: AuthApiService,
         private identity: IdentityService,
@@ -34,14 +33,8 @@ export class SignUpComponent {
         private storage: Storage) {
         this.signUpForm = builder.group({
             username: ["", Validators.required],
-            email: ["", Validators.compose([
-                Validators.required,
-                appValidators.emailValidator
-            ])],
-            password: ["", Validators.compose([
-                Validators.required,
-                Validators.minLength(6)
-            ])]
+            email: ["", Validators.compose([Validators.required, appValidators.emailValidator])],
+            password: ["", Validators.compose([Validators.required, Validators.minLength(6)])]
         });
     }
 

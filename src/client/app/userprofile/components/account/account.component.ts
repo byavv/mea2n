@@ -1,21 +1,21 @@
-import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from '@angular/common';
-import {Component, OnInit, AfterViewInit} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import {emailValidator, passwordLongerThen6IfExists} from '../../../lib/formValidators';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators, ControlValueAccessor } from '@angular/forms';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { emailValidator, passwordLongerThen6IfExists } from '../../../lib/formValidators';
 
-import {ServerResponseHandler, IdentityService, ExtHttp} from '../../../shared/services';
-import {UserApiService} from '../../services/userApi.service';
-import {SecureInput} from '../../../shared/components/securedInput/securedInput.component';
-import {Alert} from '../../../shared/components/alert/alert.component';
+import { ServerResponseHandler, IdentityService, ExtHttp } from '../../../shared/services';
+import { UserApiService } from '../../services/userApi.service';
+import { SecureInput } from '../../../shared/components/securedInput/securedInput.component';
+import { Alert } from '../../../shared/components/alert/alert.component';
+import { ShowError } from '../../../shared/directives';
 
 @Component({
     selector: 'account',
     template: require('./account.component.html'),
-    directives: [FORM_DIRECTIVES, Alert, SecureInput]
+    directives: [REACTIVE_FORM_DIRECTIVES, Alert, SecureInput]
 })
-export class AccountComponent implements OnInit, AfterViewInit{
+export class AccountComponent implements OnInit, AfterViewInit {
     submitted: boolean = false;
-    signUpForm: ControlGroup;
+    signUpForm: FormGroup;
     showAccountForm: boolean;
     error: string;
     info: string;
@@ -37,11 +37,11 @@ export class AccountComponent implements OnInit, AfterViewInit{
         });
     }
     ngOnInit() {
-       //this._getAccountData();
+        //this._getAccountData();
     }
     //temp untill #4112 is resolved
-    ngAfterViewInit(){
-         this._getAccountData();
+    ngAfterViewInit() {
+        this._getAccountData();
     }
     _getAccountData() {
         this.apiService.getUserAccount()
@@ -52,7 +52,7 @@ export class AccountComponent implements OnInit, AfterViewInit{
                     : this.showAccountForm = false;
                 this.account = data
             },
-            err  => this.onError(err))
+            err => this.onError(err))
     }
     onSubmit(value) {
         this.submitted = true;
@@ -60,7 +60,7 @@ export class AccountComponent implements OnInit, AfterViewInit{
             this.apiService.updateUserAccount(value)
                 .subscribe(
                 data => this.onSuccess(data),
-                err  => this.onError(err))
+                err => this.onError(err))
         }
     }
     onSuccess(data) {

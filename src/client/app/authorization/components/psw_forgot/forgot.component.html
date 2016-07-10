@@ -13,7 +13,7 @@
             <form #f="ngForm" no-validate (submit)="onSubmit(f.value)">
                 <div class="form-group">
                     <label for="email" class="control-label">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="name" ngControl="email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="email" [(ngModel)]="email">
                 </div>
                 <div class="row">
                     <div class="col-md-12 content content">

@@ -9,20 +9,19 @@
         </div>
         <h4 class="col-md-12">or via email</h4>
     </div>
-
     <div class="col-xs-offset-2 col-xs-8 col-md-4 col-md-offset-4">
         <div class="login-form-container">
             <alert *ngIf="!!error" [type]="'danger'" (onclose)="closeAlert()" class="error-alert">
                 {{error}}
             </alert>
-            <form [ngFormModel]="signInForm" no-validate (submit)="onSubmit(signInForm.value)">
+            <form [formGroup]="signInForm" no-validate (submit)="onSubmit(signInForm.value)">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" #username="ngForm" placeholder="name" ngControl="username">
+                    <input type="text" class="form-control" id="username" placeholder="name" formControlName="username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" #password="ngForm" placeholder="password" ngControl="password">
+                    <input type="password" class="form-control" id="password" placeholder="password" formControlName="password">
                 </div>
                 <div class="form-group" style="margin: -15px 0">
                     <div class="pull-right" style="margin-bottom: 10px">
