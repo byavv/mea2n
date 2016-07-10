@@ -125,6 +125,7 @@
     "mongoose-validator": "^1.2.4",
     "morgan": "^1.6.1",
     "nconf": "^0.8.2",
+    "ng2-bootstrap": "^1.0.17",
     "ng2-translate": "^2.2.2",
     "nodemailer": "^1.10.0",
     "parse5": "^1.5.1",

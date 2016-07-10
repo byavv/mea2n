@@ -1,6 +1,8 @@
 <div class="child-view-container col-sm-12">
-    <div class="row">
-        <h4 class="col-md-12 text-center">ACCOUNT</h4>
+    <div class="form-header">
+        <div class="row">
+            <h4 class="col-md-12 text-center">ACCOUNT</h4>
+        </div>
     </div>
     <div class="row">
         <alert *ngIf="!!error" [type]="'danger'" (onclose)="closeAlert()">
@@ -15,7 +17,7 @@
             <div class="form-group" [ngClass]="{ 'has-error' :!signUpForm.controls['username'].valid && submitted}">
                 <label for="username">*Username</label>
                 <input type="text" id="username" class="form-control" #username="ngForm" [(ngModel)]="account.username" ngControl="username"
-                placeholder="name">
+                    placeholder="name">
             </div>
             <div *ngIf="!username.control.valid && submitted">
                 <div class="form-group" *ngIf="username.control.hasError('required')">
@@ -52,11 +54,11 @@
                     </div>
                 </securedinput>
             </div>
-            <button type="submit" class="btn btn-primary">Change</button>
+            <button type="submit" class="btn btn-primary submit-form-button">Change</button>
         </form>
     </div>
     <div class="row" *ngIf="!showAccountForm">
-        <div class="col-md-12 text-center content">
+        <div class="col-md-12 form-header">
             <a href="{{account?.profileUrl}}" class="btn btn-default github-button" ngClass="{{account.provider}}-button" target="_blank">
                 <i class="fa fa-github"></i> {{account.provider | uppercase}}
             </a>

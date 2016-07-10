@@ -3,6 +3,7 @@ import { provide, PLATFORM_DIRECTIVES, ComponentRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/common/services";
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+
 import {
     TranslateLoader,
     TranslateStaticLoader,
@@ -16,6 +17,7 @@ import { App } from './app/app';
 const PROVIDERS = [
     ...BROWSER_HTTP_PROVIDERS,
     ...BROWSER_ROUTER_PROVIDERS,
+    APP_SERVICES_PROVIDERS,
     APP_ROUTER_PROVIDERS,
     provide(TranslateLoader, {
         useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),

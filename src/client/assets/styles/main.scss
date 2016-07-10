@@ -1,9 +1,112 @@
-.navbar.app-header {
-  border: 0px;
-  margin-bottom: 0px;
-  border-radius: 0px;
-  z-index: 5;
-  -webkit-transform: translateZ(0);
-  transition: all 200ms linear;
-  transform: translateY(0px);
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+
+@import "forms";
+@import "buttons";
+
+
+* {
+    margin: 0;
+}
+
+body, html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1em;   
+    line-height: 1.42857143;
+    height: 100%;
+    color: #555;
+    background-color: #eceff1;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 1400px) {
+    html {
+        font-size: 1.25em;
+    }
+}
+
+h1 {
+    font-size: 2.074em;
+}
+
+h2 {
+    font-size: 1.728em;
+}
+
+h3 {
+    font-size: 1.44em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+    cursor: pointer;
+}
+
+small {
+    font-size: 0.833em;
+}
+
+.box {
+    padding: 1.25em;
+}
+
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -65px;
+}
+
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+
+.site-footer, .page-wrap:after {
+    height: 65px;
+}
+
+@media screen and (min-width: 1400px) {
+    body, html {
+        font-size: 1.25em;
+    }
+}
+
+.content-area {
+    max-width: 70em;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.app-header {
+    background: #fff;
+}
+
+.app-footer {
+    padding: 1.5em 0;
+    height: 100%;
+    font-size: 0.9em;
+    background: #fff;
+    text-align: center;
+}
+
+
+.padding-shrink-right {
+    padding-right: 7px;
+}
+
+.padding-shrink-left {
+    padding-left: 7px;
+}
+
+@media (max-width: 768px) {
+    .padding-shrink-right {
+        padding-right: 15px;
+    }
+    .padding-shrink-left {
+        padding-left: 15px;
+    }
 }

@@ -1,6 +1,8 @@
 <div class="child-view-container col-sm-12">
-    <div class="row">
-        <h4 class="col-md-12 text-center">PERSONAL DATA</h4>
+    <div class="form-header">
+        <div class="row">
+            <h4 class="col-md-12 text-center">PERSONAL DATA</h4>
+        </div>
     </div>
     <div class="row">
         <alert *ngIf="!!error" type="danger" (onclose)="closeAlert()">
@@ -24,7 +26,7 @@
                 <dateSelector ngControl="birthday" [ngModel]="personal.birthday">
                 </dateSelector>
             </div>
-            <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Update</button>
+            <button type="submit" [disabled]="!form.valid" class="btn btn-primary submit-form-button">Update</button>
         </form>
     </div>
 </div>

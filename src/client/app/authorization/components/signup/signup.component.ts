@@ -18,7 +18,8 @@ import {APP_DIRECTIVES} from '../../../common/directives';
 @Component({
     selector: 'signup',
     template: require('./signup.component.html'),
-    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES],
+    styles: [require("./signin.scss")]
 })
 export class SignUpComponent {
     submitted: boolean = false;

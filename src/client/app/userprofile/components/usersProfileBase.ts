@@ -9,8 +9,8 @@ import {UserApiService} from "../services/userApi.service";
   <div class='row'>
       <div class='col-md-3'>
           <div class="list-group">
-              <a [routerLink]="['/personal']" class="list-group-item">Personal</a>
-              <a [routerLink]="['/account']" class="list-group-item">Account</a>
+              <a [routerLink]="['./personal']" class="list-group-item">Personal</a>
+              <a [routerLink]="['./account']" class="list-group-item">Account</a>
           </div>
       </div>
        <div class='col-md-9'>

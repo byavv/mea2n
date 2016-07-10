@@ -23,7 +23,7 @@ export class ServerResponseHandler {
     public handle401(): any {
         this.identity.update(null);
         this.storage.removeItem("authorizationData");
-        this.router.navigate(['Auth', 'Signin']);
+        this.router.navigate(["/auth/signin"]);
     }
 
     public handle500(): any {
@@ -35,7 +35,7 @@ export class ServerResponseHandler {
             if (source.message) {
                 if (_.isString(source.message)) {
                     return source.message;
-                }              
+                }
                 if (_.isArray(source.message)) {
                     if (allowArrayResult) {
                         return source.message;

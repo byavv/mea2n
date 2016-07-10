@@ -1,5 +1,6 @@
 import { RouterConfig } from '@angular/router';
 import { PersonalComponent, AccountComponent, UserProfileBase } from './';
+import { AuthGuard } from "../app.guards";
 
 export const UserProfileRoutes: RouterConfig = [
     {
@@ -9,11 +10,15 @@ export const UserProfileRoutes: RouterConfig = [
         children: [
             {
                 path: 'personal',
-                component: PersonalComponent
+                component: PersonalComponent,
+                data: { permission: ["user"] },
+                canActivate: [AuthGuard]
             },
             {
                 path: 'account',
-                component: AccountComponent
+                component: AccountComponent,
+                data: { permission: ["user"] },
+                canActivate: [AuthGuard]
             }
         ]
     }

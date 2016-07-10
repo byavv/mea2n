@@ -10,7 +10,6 @@ export interface IStorageBackend {
     removeItem(key: string): void;
 }
 
-
 export class Storage {
     storageBackend: IStorageBackend;  
 

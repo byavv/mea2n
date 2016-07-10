@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
-import {Subject, Observable} from 'rxjs';
+import {ReplaySubject, Observable} from 'rxjs';
 import {User} from '../models/user.model';
 import {Storage} from './localStorage';
 
 @Injectable()
 export class IdentityService {
     private _user: User;
-    private _dispatch: Subject<User> = new Subject<User>();
+    private _dispatch: ReplaySubject<User> = new ReplaySubject<User>();
     public get user(): User {
         return this._user;
     }
     public set user(value) {
         this._user = value;
     }
-    public get identityDispatch(): Observable<User>{
+    public get dispatch$(): Observable<User>{
         return this._dispatch.asObservable();
     };
     constructor(private localStorage: Storage) {

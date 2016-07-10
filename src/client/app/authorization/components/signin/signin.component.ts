@@ -8,7 +8,8 @@ import {Alert} from '../../../common/components/alert/alert.component';
 @Component({
     selector: 'signin',
     template: require('./signin.component.html'),
-    directives: [FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES]
+    directives: [FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES],
+    styles: [require("./signin.scss")]
 })
 export class SignInComponent {
     signInForm: ControlGroup;

@@ -13,7 +13,7 @@ export * from './permission';
 export var APP_SERVICES_PROVIDERS: Array<any> = [
     ExtHttp,
     IdentityService,
-    ServerResponseHandler,
-    PermissionService,
-    ...STORAGE_PROVIDERS
+    ServerResponseHandler,    
+    ...STORAGE_PROVIDERS,
+    PermissionService
 ];
