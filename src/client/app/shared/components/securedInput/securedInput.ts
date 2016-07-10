@@ -5,7 +5,7 @@ import { RestrictInput } from "../../directives";
 @Component({
     selector: 'securedinput',
     directives: [REACTIVE_FORM_DIRECTIVES, RestrictInput],
-    template: require("./securedInput.component.html"),
+    template: require("./securedInput.html"),
     styles: [
         require('./style.scss')
     ],

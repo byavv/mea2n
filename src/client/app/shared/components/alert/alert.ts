@@ -2,7 +2,7 @@ import {Component, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'alert',   
-    template: require("./alert.component.html"),
+    template: require("./alert.html"),
     inputs: ["type"],
     outputs: ["onclose"],
     styles: [`

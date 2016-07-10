@@ -1,12 +1,12 @@
-import { Header } from './header/header.component';
-import { SecureInput } from './securedInput/securedInput.component';
-import { Alert } from './alert/alert.component';
-import { DateSelector } from './dateSelector/dateSelector.component';
+import { Header } from './header/header';
+import { SecureInput } from './securedInput/securedInput';
+import { Alert } from './alert/alert';
+import { DateSelector } from './dateSelector/dateSelector';
 
-export * from './header/header.component';
-export * from './securedInput/securedInput.component';
-export * from './alert/alert.component';
-export * from './dateSelector/dateSelector.component';
+export * from './header/header';
+export * from './securedInput/securedInput';
+export * from './alert/alert';
+export * from './dateSelector/dateSelector';
 
 export var COMMON_COMPONENTS: Array<any> = [
     Header, SecureInput, Alert, DateSelector

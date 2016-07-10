@@ -5,7 +5,7 @@ import { NgControl, FormControl, FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilde
 @Component({
     selector: 'dateSelector[ngModel]',
     directives: [REACTIVE_FORM_DIRECTIVES],
-    template: require("./dateSelector.component.html")
+    template: require("./dateSelector.html")
 })
 export class DateSelector implements ControlValueAccessor {
     date: any = {
@@ -31,9 +31,9 @@ export class DateSelector implements ControlValueAccessor {
     constructor( @Optional() @Self() private cd: NgControl) {
         if (cd) cd.valueAccessor = this;
         this.dateForm = new FormGroup({
-            day: new FormControl(1, [Validators.required, appValidators.minValue(1), appValidators.maxValue(31)]),
+            day: new FormControl(1, Validators.compose([Validators.required, appValidators.minValue(1), appValidators.maxValue(31)])),
             month: new FormControl(5, Validators.required),
-            year: new FormControl(1990, [Validators.required, appValidators.minValue(1915), appValidators.maxValue(new Date().getFullYear())])
+            year: new FormControl(1990, Validators.compose([Validators.required, appValidators.minValue(1915), appValidators.maxValue(new Date().getFullYear())]))
         });
         this.dateForm.valueChanges
             .subscribe((val) => {

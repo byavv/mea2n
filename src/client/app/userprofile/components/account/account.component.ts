@@ -4,8 +4,7 @@ import { emailValidator, passwordLongerThen6IfExists } from '../../../lib/formVa
 
 import { ServerResponseHandler, IdentityService, ExtHttp } from '../../../shared/services';
 import { UserApiService } from '../../services/userApi.service';
-import { SecureInput } from '../../../shared/components/securedInput/securedInput.component';
-import { Alert } from '../../../shared/components/alert/alert.component';
+import { SecureInput, Alert } from '../../../shared/components';
 import { ShowError } from '../../../shared/directives';
 
 @Component({

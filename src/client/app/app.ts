@@ -1,5 +1,5 @@
 import { Component, Renderer, ViewContainerRef } from '@angular/core';
-import { Header } from './shared/components/header/header.component';
+import { Header } from './shared/components';
 import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./shared/services";
 import { Router, ROUTER_DIRECTIVES } from "@angular/router";
 
