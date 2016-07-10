@@ -1,6 +1,6 @@
 <div class="psw">
     <div [formGroup]="form" no-validate>
-        <input type="password" [id]="id" class="form-control" placeholder="password"
+        <input #input type="password" [id]="id" class="form-control" placeholder="password"
             formControlName="password" 
             [(ngModel)]="password"
             restrictInput='[a-zA-Z0-9]' 

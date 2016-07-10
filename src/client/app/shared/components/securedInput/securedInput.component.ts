@@ -12,7 +12,6 @@ import { RestrictInput } from "../../directives";
     inputs: ['id']
 })
 export class SecureInput implements ControlValueAccessor {
-    someValue: boolean = true;
     id: string;
     currentState: string = 'default';
     onChange: EventEmitter<any> = new EventEmitter();
@@ -44,9 +43,10 @@ export class SecureInput implements ControlValueAccessor {
                 this.draw("strong");
             }
         } else {
-            this.draw("default");
-            if (this.control.control.dirty) {
+            if (this.form.controls['password'].dirty) {
                 this.draw("danger");
+            } else {
+                this.draw("default");
             }
         }
     }

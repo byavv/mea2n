@@ -25,7 +25,7 @@ export class App {
     constructor(private identity: IdentityService,
         private renderer: Renderer,
         router: Router,
-        public viewContainerRef: ViewContainerRef,
+        public viewContainerRef: ViewContainerRef, /* fix for ng2-bootstrap */
         private storage: Storage) {
         identity.update(JSON.parse(storage.getItem("authorizationData")));
         renderer.listenGlobal("window", "storage", (event) => {
