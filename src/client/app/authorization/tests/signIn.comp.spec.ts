@@ -7,7 +7,7 @@ import {
     IdentityService,
     APP_SERVICES_PROVIDERS,
     ServerResponseHandler}
-from '../../common/services'
+from '../../shared/services'
 import {setBaseTestProviders} from '@angular/core/testing';
 
 import {PLATFORM_COMMON_PROVIDERS} from '@angular/core'

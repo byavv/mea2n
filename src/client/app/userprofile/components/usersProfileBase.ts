@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {PermissionService} from '../../common/services';
+import {PermissionService} from '../../shared/services';
 import {UserApiService} from "../services/userApi.service";
 
 @Component({

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FORM_DIRECTIVES} from "@angular/common";
-import {ServerResponseHandler} from '../../../common/services';
+import {ServerResponseHandler} from '../../../shared/services';
 import {AuthApiService} from '../../services/authApi.service';
-import {Alert} from '../../../common/components/alert/alert.component';
+import {Alert} from '../../../shared/components/alert/alert.component';
 
 @Component({
     selector: 'forgot',

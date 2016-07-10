@@ -1,6 +1,6 @@
 import { RouterConfig } from '@angular/router';
 import { PersonalComponent, AccountComponent, UserProfileBase } from './';
-import { AuthGuard } from "../app.guards";
+import { AuthGuard } from "../shared/routing/guards";
 
 export const UserProfileRoutes: RouterConfig = [
     {

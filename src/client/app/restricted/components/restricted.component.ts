@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { CanActivate } from '@angular/router';
-import { PermissionService } from '../../common/services';
-
+import { PermissionService } from '../../shared/services';
 
 @Component({
     selector: 'restricted',
@@ -9,9 +8,6 @@ import { PermissionService } from '../../common/services';
     directives: []
 })
 export class RestrictedComponent {
-    constructor(private permission: PermissionService) { }
-    /* routerOnActivate() {       
-        this.permission.isAuthorized(["user"])
-     }*/
+    constructor() { }    
 }
 

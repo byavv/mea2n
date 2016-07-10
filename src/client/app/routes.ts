@@ -3,8 +3,8 @@ import { HomeComponent } from './home/components/home.component';
 import { RestrictedComponent } from './restricted/components/restricted.component';
 import { UserProfileRoutes } from './userprofile';
 import { AuthorizationRoutes } from './authorization';
-import { AuthGuard } from "./app.guards";
-import { PERMISSION_SERVICE_PRIVIDERS } from "./common/services";
+import { GUARDS, AuthGuard } from "./shared/routing/guards";
+import { PERMISSION_SERVICE_PRIVIDERS } from "./shared/services";
 
 export const routes: RouterConfig = [
   { path: '', component: HomeComponent },
@@ -16,6 +16,5 @@ export const routes: RouterConfig = [
 
 export const APP_ROUTER_PROVIDERS = [
   provideRouter(routes),
-  AuthGuard,
-  //PERMISSION_SERVICE_PRIVIDERS
+  ...GUARDS
 ];

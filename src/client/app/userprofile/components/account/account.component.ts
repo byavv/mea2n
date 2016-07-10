@@ -3,10 +3,10 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {emailValidator, passwordLongerThen6IfExists} from '../../../lib/formValidators';
 
-import {ServerResponseHandler, IdentityService, ExtHttp} from '../../../common/services';
+import {ServerResponseHandler, IdentityService, ExtHttp} from '../../../shared/services';
 import {UserApiService} from '../../services/userApi.service';
-import {SecureInput} from '../../../common/components/securedInput/securedInput.component';
-import {Alert} from '../../../common/components/alert/alert.component';
+import {SecureInput} from '../../../shared/components/securedInput/securedInput.component';
+import {Alert} from '../../../shared/components/alert/alert.component';
 
 @Component({
     selector: 'account',

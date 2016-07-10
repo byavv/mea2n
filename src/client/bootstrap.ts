@@ -1,8 +1,9 @@
 import 'angular2-universal/polyfills';
+
 import { provide, PLATFORM_DIRECTIVES, ComponentRef } from '@angular/core';
 import { Http } from '@angular/http';
-import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/common/services";
-import { APP_ROUTER_PROVIDERS } from './app/app.routes';
+import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/shared/services";
+import { APP_ROUTER_PROVIDERS } from './app/routes';
 
 import {
     TranslateLoader,

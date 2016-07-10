@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ExtHttp }  from '../../common/services/extHttp';
+import { ExtHttp }  from '../../shared/services/extHttp';
 
 @Injectable()
 export class UserApiService {

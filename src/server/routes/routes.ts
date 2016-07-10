@@ -25,8 +25,8 @@ import { App } from '../../client/app/app';
 // Server rendered component
 import { Footer } from '../views/components/footer';
 // Application routes
-import { APP_ROUTER_PROVIDERS } from '../../client/app/app.routes';
-import { APP_SERVICES_PROVIDERS  } from "../../client/app/common/services";
+import { APP_ROUTER_PROVIDERS } from '../../client/app/routes';
+import { APP_SERVICES_PROVIDERS  } from "../../client/app/shared/services";
 
 // Disable Angular 2's "development mode".
 // See: https://angular.io/docs/ts/latest/api/core/enableProdMode-function.html

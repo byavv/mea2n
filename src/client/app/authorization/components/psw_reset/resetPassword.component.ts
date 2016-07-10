@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FORM_DIRECTIVES, ControlGroup, Control, Validators } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES, Params, ActivatedRoute } from '@angular/router';
-import { ServerResponseHandler } from '../../../common/services';
+import { ServerResponseHandler } from '../../../shared/services';
 import { AuthApiService } from '../../services/authApi.service';
-import { SecureInput } from '../../../common/components/securedInput/securedInput.component';
-import { Alert } from '../../../common/components/alert/alert.component';
+import { Alert, SecureInput } from '../../../shared/components/';
 
 @Component({
     selector: 'forgot',
@@ -43,7 +42,7 @@ export class ResetPasswordComponent {
             if (this.redirectTime == 0) {
                 clearInterval(timer);
                 this.countdown = false;
-                this.router.navigate(["Signin"]);
+                this.router.navigate(["auth/signin"]);
             } else {
                 this.redirectTime--;
             }
@@ -51,7 +50,7 @@ export class ResetPasswordComponent {
     }
 
     onError(err) {
-        this.router.navigate(["PswError"]);
+        this.router.navigate(["/auth/error"]);
     }
 
     closeAlert() {

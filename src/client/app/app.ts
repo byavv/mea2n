@@ -1,6 +1,6 @@
 import { Component, Renderer, ViewContainerRef } from '@angular/core';
-import { Header } from './common/components/header/header.component';
-import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./common/services";
+import { Header } from './shared/components/header/header.component';
+import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./shared/services";
 import { Router, ROUTER_DIRECTIVES } from "@angular/router";
 
 import '../assets/styles/main.scss';

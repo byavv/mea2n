@@ -2,10 +2,10 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {ControlGroup, Control, FORM_DIRECTIVES} from '@angular/common';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 
-import {ServerResponseHandler} from '../../../common/services';
+import {ServerResponseHandler} from '../../../shared/services';
 import {UserApiService} from '../../services/userApi.service';
-import {DateSelector} from '../../../common/components/dateSelector/dateSelector.component';
-import {Alert} from '../../../common/components/alert/alert.component';
+import {DateSelector} from '../../../shared/components/dateSelector/dateSelector.component';
+import {Alert} from '../../../shared/components/alert/alert.component';
 
 @Component({
     selector: 'personal',

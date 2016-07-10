@@ -1,9 +1,9 @@
-import {FORM_DIRECTIVES, ControlGroup, FormBuilder} from '@angular/common';
-import {Component, Injector} from '@angular/core';
-import { Router, ROUTER_DIRECTIVES} from '@angular/router';
-import {ServerResponseHandler, IdentityService, Storage} from '../../../common/services';
-import {AuthApiService} from '../../services/authApi.service';
-import {Alert} from '../../../common/components/alert/alert.component';
+import { FORM_DIRECTIVES, ControlGroup, FormBuilder } from '@angular/common';
+import { Component, Injector } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { ServerResponseHandler, IdentityService, Storage } from '../../../shared/services';
+import { AuthApiService } from '../../services/authApi.service';
+import { Alert } from '../../../shared/components';
 
 @Component({
     selector: 'signin',
@@ -18,7 +18,7 @@ export class SignInComponent {
         private router: Router,
         private authService: AuthApiService,
         private storage: Storage,
-        private identityService: IdentityService,
+        private identity: IdentityService,
         private responseHandler: ServerResponseHandler) {
         this.signInForm = builder.group({
             "username": [""],
@@ -32,18 +32,17 @@ export class SignInComponent {
             err => this.onError(err)
         );
     }
-
-    /*  routerOnActivate() {
-          if (this.identityService.user.isAuthenticated()) {
-              this.router.navigate(['/Home']);
-          }
-      }
-  */
+    ngOnInit() {
+        if (this.identity.user.isAuthenticated()) {
+            this.router.navigate(['/']);
+        }
+    }
+ 
     onSuccess(data) {
         if (data && data.token) {
             this.storage.setItem("authorizationData", JSON.stringify(data))
-            this.identityService.update(data);
-            this.router.navigate(['/Home']);
+            this.identity.update(data);
+            this.router.navigate(['/']);
         } else {
             this.error = "Unexpected server error";
         }

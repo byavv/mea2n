@@ -8,12 +8,12 @@ import {
 import {Component, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
-import {SecureInput} from '../../../common/components/securedInput/securedInput.component';
-import {Alert} from '../../../common/components/alert/alert.component'
-import {ServerResponseHandler, IdentityService, Storage} from '../../../common/services';
+import {SecureInput} from '../../../shared/components/securedInput/securedInput.component';
+import {Alert} from '../../../shared/components/alert/alert.component'
+import {ServerResponseHandler, IdentityService, Storage} from '../../../shared/services';
 import {AuthApiService} from '../../services/authApi.service';
 import * as appValidators from '../../../lib/formValidators';
-import {APP_DIRECTIVES} from '../../../common/directives';
+import {APP_DIRECTIVES} from '../../../shared/directives';
 
 @Component({
     selector: 'signup',
@@ -28,7 +28,7 @@ export class SignUpComponent {
     formData: any;
     constructor(builder: FormBuilder,
         private authService: AuthApiService,
-        private identityService: IdentityService,
+        private identity: IdentityService,
         private responseHandler: ServerResponseHandler,
         private router: Router,
         private storage: Storage) {
@@ -55,17 +55,17 @@ export class SignUpComponent {
         }
     }
 
-    /* routerOnActivate() {
-         if (this.identityService.user.isAuthenticated()) {
-             this.router.navigate(['/Home']);
-         }
-     }*/
+    ngOnInit() {
+        if (this.identity.user.isAuthenticated()) {
+            this.router.navigate(['/']);
+        }
+    }
 
     onSuccess(data) {
         if (data && data.token) {
             this.storage.setItem("authorizationData", JSON.stringify(data))
-            this.identityService.update(data);
-            this.router.navigate(['/Home']);
+            this.identity.update(data);
+            this.router.navigate(['/']);
 
         } else {
             this.error = "Unexpected server error";
