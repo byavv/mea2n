@@ -1,3 +1,4 @@
+import { NumberWrapper } from '@angular/compiler/src/facade/lang';
 export function emailValidator(control: any) {
     if (!/.+\@.+\..+/.test(control.value)) {
         return { email: true };
@@ -11,8 +12,8 @@ export function passwordLongerThen6IfExists(control: any) {
     }
 }
 export function minValue(value: number) {
-    return function(control) {
-        if (control.value) {
+    return function (control) {
+        if (NumberWrapper.isNumeric(control.value)) {
             if ((control.value < value)) {
                 return { minValue: true }
             }
@@ -20,8 +21,8 @@ export function minValue(value: number) {
     }
 }
 export function maxValue(value: number) {
-    return function(control) {
-        if (control.value) {
+    return function (control) {
+        if (NumberWrapper.isNumeric(control.value)) {
             if ((control.value > value)) {
                 return { maxValue: true }
             }
