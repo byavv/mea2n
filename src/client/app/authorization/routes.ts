@@ -11,7 +11,7 @@ export const AuthorizationRoutes: RouterConfig = [
     {
         path: 'auth',
         component: AuthorizationBase,
-        data: { secured: true },
+        data: { redirectWhenLogOut: "/" },
         children: [
             {
                 path: 'signin',

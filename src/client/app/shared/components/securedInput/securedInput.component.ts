@@ -3,18 +3,17 @@ ControlGroup,
 FORM_DIRECTIVES,
 ControlValueAccessor,
 NgControl,
-Control,
-CORE_DIRECTIVES
+Control
 } from '@angular/common';
-import {Component, Self, EventEmitter, ElementRef} from '@angular/core';
-import {RestrictInput} from "../../directives";
+import { Component, Self, EventEmitter, ElementRef } from '@angular/core';
+import { RestrictInput } from "../../directives";
 
 @Component({
     selector: 'securedinput',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, RestrictInput],
+    directives: [FORM_DIRECTIVES, RestrictInput],
     template: require("./securedInput.component.html"),
     styles: [
-        require('!raw!./style.less')
+        require('./style.scss')
     ],
     inputs: ['id']
 })

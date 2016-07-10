@@ -1,7 +1,9 @@
-import {RestrictInput} from './restrictInput.directive';
+import {RestrictInput} from './restrictInput';
+import {InertLink} from './inertLink';
 
-export * from './restrictInput.directive';
+export * from './restrictInput';
+export * from './inertLink';
 
 export var APP_DIRECTIVES: Array<any> = [
-  RestrictInput
+  RestrictInput, InertLink
 ];

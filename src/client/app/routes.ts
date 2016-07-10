@@ -11,7 +11,13 @@ export const routes: RouterConfig = [
   {
     path: 'restricted',
     component: RestrictedComponent,
-    data: { permission: ["user"] },
+    /**
+     * permission: 
+     *    - only users in defined in role are allowed
+     * redirectWhenLogOut:
+     *    - when user logs out being on this page, redirect to defined url  
+     */
+    data: { permission: ["user"], redirectWhenLogOut: "/" },
     canActivate: [AuthGuard]
   },
   ...UserProfileRoutes,

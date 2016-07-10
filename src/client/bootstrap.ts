@@ -3,6 +3,7 @@ import 'angular2-universal/polyfills';
 import { provide, PLATFORM_DIRECTIVES, ComponentRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { APP_SERVICES_PROVIDERS, IdentityService, Storage } from "./app/shared/services";
+import { InertLink } from "./app/shared/directives";
 import { APP_ROUTER_PROVIDERS } from './app/routes';
 
 import {
@@ -23,7 +24,8 @@ const PROVIDERS = [
     provide(TranslateLoader, {
         useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
         deps: [Http]
-    })
+    }),
+    provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true })
 ];
 
 enableProdMode();

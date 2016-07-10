@@ -9,8 +9,8 @@ import {UserApiService} from "../services/userApi.service";
   <div class='row'>
       <div class='col-md-3'>
           <div class="list-group">
-              <a [routerLink]="['./personal']" class="list-group-item">Personal</a>
-              <a [routerLink]="['./account']" class="list-group-item">Account</a>
+              <a [routerLink]="['./personal']" routerLinkActive="active" class="list-group-item">Personal</a>
+              <a [routerLink]="['./account']" routerLinkActive="active" class="list-group-item">Account</a>
           </div>
       </div>
        <div class='col-md-9'>
@@ -20,17 +20,12 @@ import {UserApiService} from "../services/userApi.service";
  </div>`,
     directives: [ROUTER_DIRECTIVES],
     styles: [
-        `.router-link-active { background:cornsilk !important; }`
+        `.active { font-size: 1.05em; }`
     ],
     providers: [UserApiService]
 })
 
 export class UserProfileBase {
-    constructor(private permission: PermissionService) { }
-    // bad option, but best untill https://github.com/angular/angular/issues/4112    
-  /*  routerOnActivate() {
-        // should be in CanActivate
-        this.permission.isAuthorized(["user"]);
-    }*/
+    constructor() { }    
 }
 

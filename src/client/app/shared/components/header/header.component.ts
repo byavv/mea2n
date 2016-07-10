@@ -13,13 +13,14 @@ import { Subscription } from "rxjs";
 })
 export class Header {
     isAuthenticated: boolean = false;
-    shouldRedirect: boolean;
+    redirectUrl: string;
     sub: Subscription;
     constructor(private identity: IdentityService, private localStorage: Storage, private router: Router, private activated: ActivatedRoute) {
         identity.dispatch$
             .subscribe((user) => {
                 this.isAuthenticated = user.isAuthenticated();
             });
+        // see this discussion https://github.com/angular/angular/issues/9662
         this.sub = this.router.events
             .filter(event => event instanceof NavigationEnd)
             .map(_ => this.router.routerState)
@@ -27,14 +28,14 @@ export class Header {
             .filter(route => route.outlet === PRIMARY_OUTLET)
             .flatMap(route => route.data)
             .subscribe(data => {
-                this.shouldRedirect = data['secured'] || false;               
+                this.redirectUrl = data['redirectWhenLogOut'];
             });
     }
     signOut() {
         this.localStorage.removeItem("authorizationData");
         this.identity.update(null);
-        if (this.shouldRedirect) {
-            this.router.navigate(["/"]);
+        if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
         }
     }
 }

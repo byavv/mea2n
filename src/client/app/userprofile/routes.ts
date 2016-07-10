@@ -1,12 +1,12 @@
 import { RouterConfig } from '@angular/router';
 import { PersonalComponent, AccountComponent, UserProfileBase } from './';
-import { AuthGuard } from "../shared/routing/guards";
+import { AuthGuard } from "../shared/routing";
 
 export const UserProfileRoutes: RouterConfig = [
     {
         path: 'user',
         component: UserProfileBase,
-        data: { secured: true },
+        data: { redirectWhenLogOut: "/"},
         children: [
             {
                 path: 'personal',
