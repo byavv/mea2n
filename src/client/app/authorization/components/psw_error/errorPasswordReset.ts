@@ -3,8 +3,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
     selector: 'pswerr',
-    template: require('./errorPasswordReset.component.html'),
-    directives: [ROUTER_DIRECTIVES]
+    template: require('./errorPasswordReset.html'),
+    directives: [...ROUTER_DIRECTIVES]
 })
 export class ErrorResetPasswordComponent {
     error: string;

@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
 import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { ServerResponseHandler } from '../../../shared/services';
-import { AuthApiService } from '../../services/authApi.service';
-import { Alert, SecureInput } from '../../../shared/components/';
+import { AuthApiService } from '../../services/authApi';
+import { Alert, SecureInput } from '../../../shared/components';
 import { ShowError } from '../../../shared/directives';
 
 @Component({
     selector: 'forgot',
-    template: require('./resetPassword.component.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, SecureInput, Alert, ROUTER_DIRECTIVES, ShowError]
+    template: require('./resetPassword.html'),
+    directives: [REACTIVE_FORM_DIRECTIVES, SecureInput, Alert, ...ROUTER_DIRECTIVES, ShowError]
 })
 export class ResetPasswordComponent {
     error: string;
@@ -27,7 +27,7 @@ export class ResetPasswordComponent {
             password: ["", Validators.compose([Validators.required, Validators.minLength(6)])]
         });
     }
-    onSubmit(formData) {      
+    onSubmit(formData) {
         this.authApiService.setNewPassword(formData.password, this.route.snapshot.params['token'])
             .subscribe(
             (success) => this.onSuccess(success),

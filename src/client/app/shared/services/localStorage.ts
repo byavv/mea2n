@@ -1,5 +1,4 @@
 import {Inject, OpaqueToken, provide} from '@angular/core';
-import {LocalStorage} from 'angular2-universal';
 import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
 
 export const localStorageBackend = new OpaqueToken('localStorageBackend');
@@ -17,7 +16,7 @@ export class Storage {
         this.storageBackend = storageBackend;     
     }
 
-    getItem(key) {
+    getItem(key): string {
         return this.storageBackend.getItem(key);
     }
 
@@ -36,7 +35,8 @@ export class Storage {
 export const STORAGE_PROVIDERS = [
     Storage,
     provide(localStorageBackend, {
-        useFactory() {           
+        useFactory() {     
+            //https://github.com/angular/universal/issues/272      
             return getDOM().getGlobalEventTarget('window').localStorage || {
                 getItem: (key) => { return null },
                 setItem: (key, value) => { return null },

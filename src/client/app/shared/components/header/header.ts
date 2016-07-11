@@ -7,7 +7,7 @@ import { Subscription } from "rxjs";
 @Component({
     selector: 'app-header',
     template: require('./header.html'),
-    directives: [ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES],
+    directives: [...ROUTER_DIRECTIVES, DROPDOWN_DIRECTIVES],
     styles: [require('./header.scss')]
 })
 export class Header {

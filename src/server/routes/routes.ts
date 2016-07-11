@@ -1,5 +1,8 @@
 import 'angular2-universal/polyfills';
 import { Http } from '@angular/http';
+import { provideRouter } from "@angular/router";
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import { PLATFORM_DIRECTIVES } from '@angular/core';
 import {
     provide,
     enableProdMode,
@@ -13,6 +16,7 @@ import {
     NODE_HTTP_PROVIDERS,
     NODE_PRELOAD_CACHE_HTTP_PROVIDERS
 } from 'angular2-universal';
+
 import {
     TranslateService,
     TranslateLoader,
@@ -22,10 +26,12 @@ import {
 import userRoutes  from './user.routes';
 // Root app component
 import { App } from '../../client/app/app';
+// Directives to use globally
+import { InertLink } from '../../client/app/shared/directives';
 // Server rendered component
 import { Footer } from '../views/components/footer';
 // Application routes
-import { APP_ROUTER_PROVIDERS } from '../../client/app/routes';
+import { APP_ROUTER_PROVIDERS, routes } from '../../client/app/routes';
 import { APP_SERVICES_PROVIDERS  } from "../../client/app/shared/services";
 
 // Disable Angular 2's "development mode".
@@ -34,6 +40,11 @@ enableProdMode();
 
 export function configureRoutes(app) {
     userRoutes(app);
+    app.get('/app/defaults', (req, res) => {       
+        res.status(200).send({
+            some: 'defaultValue'
+        })
+    });
     const origin_url = process.env.ORIGIN_URL || 'http://localhost:3030';
     function ngApp(req, res) {
         let baseUrl = '/';
@@ -46,28 +57,30 @@ export function configureRoutes(app) {
             ],
             providers: [
                 ...NODE_HTTP_PROVIDERS,
-                ...NODE_LOCATION_PROVIDERS,
-                
-                APP_SERVICES_PROVIDERS,
-                APP_ROUTER_PROVIDERS,
+                ...NODE_PLATFORM_PIPES,
+
+                ...APP_SERVICES_PROVIDERS,
+                ...APP_ROUTER_PROVIDERS,
 
                 provide(REQUEST_URL, { useValue: url }),
+                ...NODE_LOCATION_PROVIDERS,
+
+                provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true }),
+
                 provide(TranslateLoader, {
                     useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
                     deps: [Http]
-                })
+                }),
+
+                disableDeprecatedForms(),
+                provideForms(),
             ],
-            preboot: {
-                appRoot: 'app',          // selector for Angular root element
-                replay: 'rerender',      // Angular will re-render the view
-                freeze: 'spinner',       // show spinner w button click & freeze page
-                focus: true,             // maintain focus after re-rendering
-                buffer: true,            // client app will write to hidden div until bootstrap complete
-                keyPress: true,          // all keystrokes in text elements recorded
-                buttonPress: true        // when button pressed, record and freeze page          
-            },
+            preboot: false,
             async: true
         });
     };
     app.use('/', ngApp);
+    app.use('/auth*', ngApp);
+    app.use('/user*', ngApp);
+    app.use('/restricted*', ngApp);
 };

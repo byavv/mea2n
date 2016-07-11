@@ -6,14 +6,14 @@ import { SecureInput, Alert } from '../../../shared/components';
 import { ShowError } from '../../../shared/directives';
 
 import { ServerResponseHandler, IdentityService, Storage } from '../../../shared/services';
-import { AuthApiService } from '../../services/authApi.service';
-import * as appValidators from '../../../lib/formValidators';
+import { AuthApiService } from '../../services/authApi';
+import { emailValidator } from '../../../lib/formValidators';
 import { APP_DIRECTIVES } from '../../../shared/directives';
 
 @Component({
     selector: 'signup',
-    template: require('./signup.component.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES, ShowError],
+    template: require('./signup.html'),
+    directives: [REACTIVE_FORM_DIRECTIVES, ...ROUTER_DIRECTIVES, SecureInput, Alert, APP_DIRECTIVES, ShowError],
     styles: [require("./signin.scss")]
 })
 export class SignUpComponent {
@@ -33,7 +33,7 @@ export class SignUpComponent {
         private storage: Storage) {
         this.signUpForm = builder.group({
             username: ["", Validators.required],
-            email: ["", Validators.compose([Validators.required, appValidators.emailValidator])],
+            email: ["", Validators.compose([Validators.required, emailValidator])],
             password: ["", Validators.compose([Validators.required, Validators.minLength(6)])]
         });
     }

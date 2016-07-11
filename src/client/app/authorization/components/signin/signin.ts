@@ -2,13 +2,13 @@ import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@a
 import { Component, Injector } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { ServerResponseHandler, IdentityService, Storage } from '../../../shared/services';
-import { AuthApiService } from '../../services/authApi.service';
+import { AuthApiService } from '../../services/authApi';
 import { Alert } from '../../../shared/components';
 
 @Component({
     selector: 'signin',
-    template: require('./signin.component.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, Alert, ROUTER_DIRECTIVES],
+    template: require('./signin.html'),
+    directives: [REACTIVE_FORM_DIRECTIVES, Alert, ...ROUTER_DIRECTIVES],
     styles: [require("./signin.scss")]
 })
 export class SignInComponent {
@@ -21,8 +21,8 @@ export class SignInComponent {
         private identity: IdentityService,
         private responseHandler: ServerResponseHandler) {
         this.signInForm = fBuilder.group({
-            "username": [""],
-            "password": [""]
+            username: [""],
+            password: [""]
         });
     }
 
@@ -32,12 +32,13 @@ export class SignInComponent {
             err => this.onError(err)
         );
     }
+
     ngOnInit() {
         if (this.identity.user.isAuthenticated()) {
             this.router.navigate(['/']);
         }
     }
- 
+
     onSuccess(data) {
         if (data && data.token) {
             this.storage.setItem("authorizationData", JSON.stringify(data))

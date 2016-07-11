@@ -1,10 +1,10 @@
-import { AccountComponent } from './components/account/account.component';
-import { PersonalComponent } from './components/personal/personal.component';
-import { UserProfileBase } from './components/usersProfileBase';
+import { AccountComponent } from './components/account/account';
+import { PersonalComponent } from './components/personal/personal';
+import { UserProfileBase } from './components/usersProfile.base';
 
-export * from './components/account/account.component';
-export * from './components/personal/personal.component';
-export * from './components/usersProfileBase';
+export * from './components/account/account';
+export * from './components/personal/personal';
+export * from './components/usersProfile.base';
 export * from './routes';
 
 export var USERPROFILE_COMPONENTS = [

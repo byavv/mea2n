@@ -1,8 +1,8 @@
 
 import { it, xit, describe, expect, afterEach,
     beforeEach, async, inject, beforeEachProviders } from '@angular/core/testing';
-import {SignInComponent} from "../components/signin/signin.component";
-import {AuthApiService} from "../services/authApi.service";
+import {SignInComponent} from "../components/signin/signin";
+import {AuthApiService} from "../services/authApi";
 import {
     IdentityService,
     APP_SERVICES_PROVIDERS,

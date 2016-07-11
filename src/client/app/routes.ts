@@ -1,16 +1,16 @@
-import { provideRouter, RouterConfig } from '@angular/router';
-import { HomeComponent } from './home/components/home.component';
-import { RestrictedComponent } from './restricted/components/restricted.component';
+import { provideRouter, RouterConfig, Route } from '@angular/router';
+import { HomeComponent } from './home/components/home';
+import { SecuredPageComponent } from './secured';
 import { UserProfileRoutes } from './userprofile';
 import { AuthorizationRoutes } from './authorization';
 import { GUARDS, AuthGuard } from "./shared/routing";
 import { PERMISSION_SERVICE_PRIVIDERS } from "./shared/services";
 
 export const routes: RouterConfig = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   {
-    path: 'restricted',
-    component: RestrictedComponent,
+    path: 'secured',
+    component: SecuredPageComponent,
     /**
      * permission: 
      *    - only users in defined in role are allowed
@@ -26,6 +26,6 @@ export const routes: RouterConfig = [
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes),
+  provideRouter(routes/*, { enableTracing: true }*/),
   ...GUARDS
 ];

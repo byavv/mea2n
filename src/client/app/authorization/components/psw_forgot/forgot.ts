@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 import { ServerResponseHandler } from '../../../shared/services';
-import { AuthApiService } from '../../services/authApi.service';
+import { AuthApiService } from '../../services/authApi';
 import { Alert } from '../../../shared/components';
 
 @Component({
     selector: 'forgot',
-    template: require('./forgot.component.html'),
+    template: require('./forgot.html'),
     directives: [REACTIVE_FORM_DIRECTIVES, Alert],
     styles: [require('./style.scss')]
 })

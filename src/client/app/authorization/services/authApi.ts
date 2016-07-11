@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
 import { ExtHttp } from '../../shared/services';
 import { Observable } from 'rxjs';
 
@@ -11,7 +10,7 @@ export class AuthApiService {
         this._http = exHttp;
     }
 
-    public signUp(userData): Observable<Response> {
+    public signUp(userData): Observable<any> {
         return this._http
             .post("/auth/signup", JSON.stringify(userData))
             .map(res => res.json());

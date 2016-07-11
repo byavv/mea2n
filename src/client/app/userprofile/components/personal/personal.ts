@@ -1,16 +1,16 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, REACTIVE_FORM_DIRECTIVES, FormBuilder } from '@angular/forms';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { ServerResponseHandler } from '../../../shared/services';
-import { UserApiService } from '../../services/userApi.service';
+import { UserApiService } from '../../services/userApi';
 import { DateSelector, Alert } from '../../../shared/components';
 import { ShowError } from '../../../shared/directives';
 
 @Component({
     selector: 'personal',
-    template: require('./personal.component.html'),
-    directives: [ROUTER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, DateSelector, Alert, ShowError]
+    template: require('./personal.html'),
+    directives: [...ROUTER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, DateSelector, Alert, ShowError]
 })
 export class PersonalComponent implements OnInit {
     personal = {
@@ -32,7 +32,7 @@ export class PersonalComponent implements OnInit {
         });
     }
     ngOnInit() {
-        // wait a bit. this way is not implemented yet
+        // this way is promised
         // this.apiService.getProfile()
         //        .subscribe(person => this.form.updateValue(person));
         this.apiService.getProfile()
