@@ -1,5 +1,8 @@
-[![CircleCI](https://circleci.com/gh/byavv/mea2n.svg?style=svg)](https://circleci.com/gh/byavv/mea2n)
-![CircleCI](https://david-dm.org/byavv/mea2n.svg)
+
+[![CircleCI][circle-image]][circle-url]
+
+[![Dependency Status][david-image]][david-url]
+
 
 # MEAN (angular2.rc4)
 
@@ -65,3 +68,7 @@ $ gulp test:e2e
  ```
        
 
+[david-image]: https://david-dm.org/byavv/mea2n.svg
+[david-url]: https://david-dm.org/byavv/mea2n
+[circle-image]: https://circleci.com/gh/byavv/mea2n.svg?style=svg
+[circle-url]: https://circleci.com/gh/byavv/mea2n
