@@ -1,4 +1,5 @@
 [![CircleCI][circle-image]][circle-url]
+[![Build Status][travis-image]][travis-url]
 
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-dev-image]][david-dev-url]
@@ -81,3 +82,5 @@ $ gulp test:e2e
 [david-dev-url]: https://david-dm.org/byavv/mea2n#info=devDependencies
 [circle-image]: https://circleci.com/gh/byavv/mea2n.svg?style=shield
 [circle-url]: https://circleci.com/gh/byavv/mea2n
+[travis-image]: https://travis-ci.org/byavv/mea2n.svg?branch=master
+[travis-url]: https://travis-ci.org/byavv/mea2n
