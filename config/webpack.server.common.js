@@ -10,7 +10,7 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.html$/, loader: "raw" },         
+            { test: /\.html$/, loader: "raw" },
             {
                 test: /\.ts$/,
                 loader: 'ts-loader',
@@ -18,13 +18,7 @@ module.exports = {
                     /node_modules/
                 ],
                 query: {
-                    ignoreDiagnostics: [
-                        2403, // 2403 -> Subsequent variable declarations
-                        2300, // 2300 -> Duplicate identifier
-                        2374, // 2374 -> Duplicate number index signature
-                        2375, // 2375 -> Duplicate string index signature
-                        2502  // 2502 -> Referenced directly or indirectly
-                    ]
+                    ignoreDiagnostics: [2403, 2300, 2374, 2375, 2502]
                 },
             }
         ]
@@ -38,15 +32,3 @@ module.exports = {
         Buffer: true
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
