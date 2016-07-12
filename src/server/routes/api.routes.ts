@@ -10,7 +10,7 @@ import {sendResetMail} from "../libs/mail.helper";
 var jwt = require('express-jwt');
 var User = mongoose.model("User");
 
-export default function(app: express.Application) {
+export function provideApiRoutes (app: express.Application) {
     
     var _tokenHelper = tokenHelper(redisconfig.client);
     var _authCtrl = authController(User, _tokenHelper);

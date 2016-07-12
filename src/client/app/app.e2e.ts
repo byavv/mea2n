@@ -10,8 +10,7 @@ describe('App', () => {
     });
 
     it('should have <header>', () => {
-        var subject = element(by.css('app-header')).isPresent();
-        var result = true;
-        expect(subject).toEqual(result);
+        var subject = element(by.css('app-header')).isPresent();       
+        expect(subject).toEqual(true);
     });
 });

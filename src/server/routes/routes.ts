@@ -23,7 +23,7 @@ import {
     TranslateStaticLoader
 } from "ng2-translate/ng2-translate";
 // Server api routes
-import userRoutes  from './user.routes';
+import { provideApiRoutes }  from './api.routes';
 // Root app component
 import { App } from '../../client/app/app';
 // Directives to use globally
@@ -31,7 +31,7 @@ import { InertLink } from '../../client/app/shared/directives';
 // Server rendered component
 import { Footer } from '../views/components/footer';
 // Application routes
-import { APP_ROUTER_PROVIDERS, routes } from '../../client/app/routes';
+import { APP_ROUTER_PROVIDERS } from '../../client/app/routes';
 import { APP_SERVICES_PROVIDERS  } from "../../client/app/shared/services";
 
 // Disable Angular 2's "development mode".
@@ -39,8 +39,9 @@ import { APP_SERVICES_PROVIDERS  } from "../../client/app/shared/services";
 enableProdMode();
 
 export function configureRoutes(app) {
-    userRoutes(app);
-    app.get('/app/defaults', (req, res) => {       
+    provideApiRoutes(app);
+    // configuration to be send to client when app starts
+    app.get('/app/defaults', (req, res) => {
         res.status(200).send({
             some: 'defaultValue'
         })
@@ -82,5 +83,5 @@ export function configureRoutes(app) {
     app.use('/', ngApp);
     app.use('/auth*', ngApp);
     app.use('/user*', ngApp);
-    app.use('/restricted*', ngApp);
+    app.use('/secured*', ngApp);
 };

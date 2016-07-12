@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/byavv/mea2n.svg?style=svg)](https://circleci.com/gh/byavv/mea2n)
+![CircleCI](https://david-dm.org/byavv/mea2n.svg)
+
 # MEAN (angular2.rc4)
 
 #### What we've got here
@@ -13,24 +16,16 @@
 ## Quick start
 
 ```bash
-# install globally
-npm install --global gulp typescript typings webpack nodemon karma tsd node-gyp
 
 # clone the repo
-git clone https://github.com/byavv/mea2n.git 
+$ git clone https://github.com/byavv/mea2n.git 
 
 # change into the repo directory
-cd mea2n
+$ cd mea2n
 
 # install 
-npm install
-bower install
+$ npm install
 
-# build app
-gulp build
-
-# run in dev mode
-gulp
 ```
 ## NOTE!
 
@@ -42,11 +37,15 @@ gulp
 ```sh
 $ gulp build
 ```
-###Build client bundle:
+### for production: 
+```sh
+$ gulp build --env production                   
+```
+### Build client bundle:
 ```sh
 $ gulp build:client
 ```
-###Build server bundle:
+### Build server bundle:
 ```sh
 $ gulp build:server
 ```
@@ -56,9 +55,13 @@ Builds all and starts server:
 $ gulp
 ```
 ## Testing
-* `$ gulp test`
-* `$ gulp test:client`    
-* `$ gulp test:server`    
-* `$ gulp test:e2e`
+```bash
+
+$ gulp test
+$ gulp test:client
+$ gulp test:server    
+$ gulp test:e2e
+
+ ```
        
 

@@ -1,13 +1,11 @@
 /**
  * @author: @AngularClass
+ * see: https://github.com/AngularClass/angular2-webpack-starter
  */
-
 Error.stackTraceLimit = Infinity;
-
-require('es6-shim');
-require('reflect-metadata');
-// Typescript emit helpers polyfill
-//require('ts-helpers');
+require('core-js/es6');
+require('core-js/es7/reflect');
+require('ts-helpers');
 
 require('zone.js/dist/zone');
 require('zone.js/dist/long-stack-trace-zone');
@@ -16,7 +14,6 @@ require('zone.js/dist/async-test');
 require('zone.js/dist/fake-async-test');
 require('zone.js/dist/sync-test');
 
-// RxJS
 require('rxjs/Rx');
 
 var testing = require('@angular/core/testing');
@@ -27,12 +24,10 @@ testing.setBaseTestProviders(
   browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
 );
 
-Object.assign(global, testing);
+var testContext = require.context('./src', true, /\.spec\.ts/);
 
+function requireAll(requireContext) {
+  return requireContext.keys().map(requireContext);
+}
 
-var testContext = require.context('./test/client', true, /\.spec\.ts/);
-var appContext = require.context('./src/client', true, /\.spec\.ts/);
-
-
-appContext.keys().forEach(appContext);
-testContext.keys().forEach(testContext);
+var modules = requireAll(testContext);

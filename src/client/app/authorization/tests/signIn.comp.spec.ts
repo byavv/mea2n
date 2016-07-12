@@ -1,8 +1,8 @@
-
-import { it, xit, describe, expect, afterEach,
+import { it, xit, describe, afterEach,
     beforeEach, async, inject, beforeEachProviders } from '@angular/core/testing';
 import {SignInComponent} from "../components/signin/signin";
 import {AuthApiService} from "../services/authApi";
+import { User } from "../../shared/models/user.model"
 import {
     IdentityService,
     APP_SERVICES_PROVIDERS,
@@ -10,15 +10,12 @@ import {
 from '../../shared/services'
 import { setBaseTestProviders } from '@angular/core/testing';
 
-import { PLATFORM_COMMON_PROVIDERS } from '@angular/core'
-import * as _ from 'lodash';
-import * as rx from "rxjs/Rx";
-
 import {App} from '../../app';
 
 
 import {provide, ApplicationRef, Component, PLATFORM_DIRECTIVES } from '@angular/core';
-import { FORM_PROVIDERS, FormBuilder } from '@angular/common';
+
+import { REACTIVE_FORM_DIRECTIVES, FormBuilder, provideForms, disableDeprecatedForms } from '@angular/forms';
 import { Router } from "@angular/router";
 import { By } from '@angular/platform-browser';
 
@@ -47,7 +44,7 @@ describe('Authorization module tests', () => {
         update() { }
     }
     class MockAuthService {
-        signIn() { return rx.Observable.of(fakeToken) };
+        signIn() { return Observable.of(fakeToken) };
     }
     class MockRouter {
         navigate(value) { }
@@ -59,7 +56,8 @@ describe('Authorization module tests', () => {
     var authSpy;
     describe("Signin component tests", () => {
         beforeEachProviders(() => [
-            FORM_PROVIDERS,
+            disableDeprecatedForms(),
+            provideForms(),
             APP_SERVICES_PROVIDERS,
             provide(Router, { useFactory: () => new MockRouter() }),
             provide(IdentityService, { useFactory: () => new MockIdentityService() }),
@@ -68,6 +66,7 @@ describe('Authorization module tests', () => {
         ]);
 
         beforeEach(inject([IdentityService, Router, AuthApiService], (identity, router, auth) => {
+            identity.user = new User();
             authSpy = spyOn(auth, "signIn").and.callThrough();
             spyOn(identity, "update");
             spyOn(router, "navigate");
@@ -98,12 +97,12 @@ describe('Authorization module tests', () => {
             component.onSubmit(fakeToken);
             return authService.signIn().toPromise().then((result) => {
                 expect(result).toBe(fakeToken);
-                expect(component.identityService.update).toHaveBeenCalledWith(fakeToken);
+                expect(component.identity.update).toHaveBeenCalledWith(fakeToken);
             });
         })));
 
         it('Should handle error respond', async(inject([AuthApiService], (authService) => {
-            authSpy.and.returnValue(rx.Observable.throw(401));
+            authSpy.and.returnValue(Observable.throw(401));
             component.onSubmit(fakeToken);
             return authService.signIn().toPromise().then((result) => {
             }, (err) => {
@@ -113,13 +112,13 @@ describe('Authorization module tests', () => {
         })));
 
         it('Should show error message', async(inject([AuthApiService, TestComponentBuilder], (authService, tcb: TestComponentBuilder) => {
-            authSpy.and.returnValue(rx.Observable.throw(401));
+            authSpy.and.returnValue(Observable.throw(401));
             return tcb
                 .createAsync(SignInComponent).then((fixture: ComponentFixture<SignInComponent>) => {
                     fixture.componentInstance.onSubmit(fake_signin_obj);
                     fixture.detectChanges();
                     var compiled = fixture.debugElement.nativeElement;
-                    expect(compiled.querySelector('div')).toHaveText('401');
+                    expect(compiled.querySelector('div').innerText).toBe("401");
                 });
         })));
     });
