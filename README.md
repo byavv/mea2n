@@ -38,24 +38,25 @@ $ npm install
 ## NOTE!
 
 1. Register [new github application](https://github.com/settings/applications/new) and fill secrets in 
-"config.js" to get github authentication functionality.
-2. Fill sender email data in "config.js" to be able to send reset password emails.
+"config.json" to get github authentication functionality.
+2. Fill sender email data in "config.json" to be able to send reset password emails.
 
 ## Build
+Development build (by default):
 ```sh
 $ gulp build
 ```
-### for production: 
+Production build:
 ```sh
 $ gulp build --env production                   
 ```
-### Build client bundle:
+Build client:
 ```sh
-$ gulp build:client
+$ gulp build:client (--env production)
 ```
-### Build server bundle:
+Build server:
 ```sh
-$ gulp build:server
+$ gulp build:server (--env production)
 ```
 ## Serve/watch
 Builds all and starts server:
