@@ -3,7 +3,7 @@ const __root = require('./helpers'),
     commonConfig = require('./webpack.server.common.js');
 
 
-module.exports = webpackMerge(commonConfig, {  
+module.exports = webpackMerge(commonConfig, {
     entry: {
         server: [__root('../src/server/server.ts')]
     },

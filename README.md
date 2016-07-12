@@ -1,7 +1,7 @@
-
 [![CircleCI][circle-image]][circle-url]
 
 [![Dependency Status][david-image]][david-url]
+[![devDependency Status][david-dev-image]][david-dev-url]
 
 
 # MEAN (angular2.rc4)
@@ -10,7 +10,7 @@
 
 * Typescript environment.
 * JWT-based authentication (naive, but ready to scale).
-* Server rendering via [angular-universal](https://github.com/angular/universal).
+* Server rendering via [angular2-universal](https://github.com/angular/universal).
 * Bootstrap 4.
 
 #### Features:
@@ -57,7 +57,7 @@ $ gulp build:client (--env production)
 ```
 Build server:
 ```sh
-$ gulp build:server (--env production)
+$ gulp build:server
 ```
 ## Serve/watch
 Builds all and starts server:
@@ -77,5 +77,7 @@ $ gulp test:e2e
 
 [david-image]: https://david-dm.org/byavv/mea2n.svg
 [david-url]: https://david-dm.org/byavv/mea2n
+[david-dev-image]: https://david-dm.org/byavv/mea2n/dev-status.svg
+[david-dev-url]: https://david-dm.org/byavv/mea2n#info=devDependencies
 [circle-image]: https://circleci.com/gh/byavv/mea2n.svg?style=svg
 [circle-url]: https://circleci.com/gh/byavv/mea2n

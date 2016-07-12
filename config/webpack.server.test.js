@@ -9,6 +9,17 @@ module.exports = webpackMerge(commonConfig, {
     entry: {
         test: [__root('../server-spec.bundle.js')]
     },
+    postLoaders: [
+        {
+            test: /\.(js|ts)$/,
+            include: __root('../src/server'),
+            loader: 'istanbul-instrumenter-loader',
+            exclude: [
+                /\.e2e\.ts$/,
+                /node_modules/
+            ]
+        }
+    ],
     output: {
         path: __root('../test'),
         filename: "[name].spec.js"
