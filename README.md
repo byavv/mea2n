@@ -11,6 +11,11 @@
 * Typescript environment.
 * JWT-based authentication (naive, but ready to scale).
 * Server rendering via [angular-universal](https://github.com/angular/universal).
+* Bootstrap 4.
+
+ Features:
+* Users management and authentication sample
+* Complete angular2 workflow
 
 ## Requirements
 * [MongoDb](https://www.mongodb.org/)
