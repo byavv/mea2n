@@ -2,25 +2,31 @@
  * @author: @AngularClass
  * see: https://github.com/AngularClass/angular2-webpack-starter
  */
-module.exports = function(config) {
+module.exports = function (config) {
   var testWebpackConfig = require('./config/webpack.client');
-  config.set({  
+  config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    exclude: [ ],
-    files: [ { pattern: './spec-bundle.js', watched: false } ],
+    exclude: [],
+    files: [{ pattern: './spec-bundle.js', watched: false }],
     preprocessors: { './spec-bundle.js': ['coverage', 'webpack'] },
     webpack: testWebpackConfig,
     coverageReporter: {
-      dir : 'coverage/',
+      dir: 'coverage/',
       reporters: [
         { type: 'text-summary' },
         { type: 'json' },
         { type: 'html' }
       ]
     },
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     webpackServer: { noInfo: true },
-    reporters: [ 'mocha', 'coverage' ],
+    reporters: ['mocha', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
