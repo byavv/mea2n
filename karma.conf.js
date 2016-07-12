@@ -3,13 +3,13 @@
  * see: https://github.com/AngularClass/angular2-webpack-starter
  */
 module.exports = function(config) {
-  var testWebpackConfig = require('./webpack.config.js')().test;
+  var testWebpackConfig = require('./config/webpack.client');
   config.set({  
     basePath: '',
     frameworks: ['jasmine'],
     exclude: [ ],
     files: [ { pattern: './spec-bundle.js', watched: false } ],
-    preprocessors: { './spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+    preprocessors: { './spec-bundle.js': ['coverage', 'webpack'] },
     webpack: testWebpackConfig,
     coverageReporter: {
       dir : 'coverage/',

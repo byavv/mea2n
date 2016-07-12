@@ -13,7 +13,7 @@
     "build": "./node_modules/.bin/gulp build --env production",
     "prestart": "npm run build",
     "start": "node build/server/server.js",
-    "test": "./node_modules/.bin/gulp test",
+    "test": "./node_modules/.bin/gulp test --env test",
     "pree2e": "webdriver-manager update --standalone",
     "e2e": "protractor"
   },
