@@ -3,7 +3,7 @@ import * as path from "path";
 import * as chalk from "chalk";
 import * as fs from "fs";
 import * as nconf from "nconf";
-import {defaults} from "./defaults";
+import { defaults } from "./defaults";
 import * as configs from "./env";
 
 /**
@@ -14,7 +14,7 @@ export var config = {
     for: (env) => {
         env = env.toLowerCase().trim();
         return new Promise((resolve, reject) => {
-            nconf.overrides(configs[env]);             
+            nconf.overrides(configs[env]);
             // do some async stuff if needed           
             resolve();
         });

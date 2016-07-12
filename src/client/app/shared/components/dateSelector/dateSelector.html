@@ -1,0 +1,32 @@
+<div class="row">
+    <div [formGroup]="dateForm">
+        <div class="col-md-3">
+            <div class="form-group" [ngClass]="{ 'has-error' :!dateForm.controls['day'].valid}">
+                <label for="day">Day</label>
+                <input class="form-control" min="1" max="31" name="day" type="number" formControlName="day" [(ngModel)]="date.day"
+                id="day">
+                <div *ngIf="!dateForm.controls['day'].valid">
+                    Year format is wrong
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="month">Month</label>
+                <select name="month" id="month" class="form-control" formControlName="month" [(ngModel)]="date.month">
+                    <option *ngFor="let month of months" [value]="month.value">{{month.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group" [ngClass]="{ 'has-error' :!dateForm.controls['year'].valid}">
+                <label for="year">Year</label>
+                <input class="form-control" min="1915" [(ngModel)]="date.year" formControlName="year" name="year" type="number"
+                id="year">              
+                <div *ngIf="!dateForm.controls['year'].valid">
+                    Year format is wrong
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

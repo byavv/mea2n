@@ -86,9 +86,9 @@ export function authController(User: any, tokenHelper: any) {
     function me(req, res) {
         var roles = req.body.roles || '';
         if (_.intersection(req.user.roles, roles).length === roles.length) {
-            return res.status(200).send("OK");
+            return res.status(200).send(true);
         } else {
-            return res.status(401).send("NOT OK");
+            return res.sendStatus(401);
         }
     }
     /**

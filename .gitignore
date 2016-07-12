@@ -8,3 +8,4 @@ npm-debug.log
 config1.json
 /src/client/vendor
 /coverage
+/build

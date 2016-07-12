@@ -14,8 +14,8 @@ import * as path from "path";
 import * as fs from "fs";
 import * as https from "https";
 
-let env = process.env.NODE_ENV || "development";
-let app = express();
+const env = process.env.NODE_ENV || "development";
+const app = express();
 
 config
     .configure.for(env)

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="form-header">
+        <h3 class="col-md-12 text-center">Create account</h3>
+    </div>
+    <div class="col-xs-offset-2 col-xs-8 col-md-4 col-md-offset-4">
+        <div class="login-form-container">
+            <alert *ngIf="!!error" [type]="'danger'" (onclose)="closeAlert()">
+                {{error}}
+            </alert>
+            <form [formGroup]="signUpForm" no-validate (submit)="onSubmit(signUpForm.value)">
+                <div class="form-group" [ngClass]="{ 'has-error' : !signUpForm.controls['username'].valid && submitted }">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" formControlName="username" placeholder="name">
+                    <show-error *ngIf="submitted" control="username" [errors]="{
+                            'required': 'Username field is required'                        
+                        }">
+                    </show-error>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error' : !signUpForm.controls['email'].valid && submitted}">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email" placeholder="email">
+                    <show-error *ngIf="submitted" control="email" [errors]="{
+                            'required': 'Email field is required', 
+                            'email':'Email is not valid!'
+                        }">
+                    </show-error>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error' :!signUpForm.controls['password'].valid && submitted}">
+                    <label for="password">Password</label>
+                    <securedinput [id]="'password'" formControlName="password">
+                    </securedinput>
+                    <show-error *ngIf="submitted" control="password" [errors]="{
+                            'required': 'Password field is required', 
+                            'minlength':' Password field should be not less then 6'
+                        }">
+                    </show-error>
+                </div>
+                <button type="submit" class="btn btn-primary submit-form-button">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -2,9 +2,7 @@ import * as jwt from "jsonwebtoken";
 import * as nconf from "nconf";
 import * as chalk from "chalk";
 
-
-export default function(client: any) {
-   
+export default function(client: any) {   
     return {
         /**
          *  Create new token from user profile and add it to storage

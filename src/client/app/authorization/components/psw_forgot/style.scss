@@ -1,0 +1,16 @@
+.spin {
+    position: absolute;
+    padding: 10px 10px;
+    margin: 0 10px;
+    right: 0;
+    visibility: hidden;   
+}
+
+.process {
+    visibility: visible;
+    animation: spin-process 1s infinite linear;       
+}
+
+@-moz-keyframes spin-process { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin-process { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin-process { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

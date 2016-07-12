@@ -1,0 +1,31 @@
+<header>
+    <div class="navbar navbar-light app-header">
+        <div class="header-container center-block">
+            <a [routerLink]="['/']" class="navbar-brand">MEA(2)N</a>
+            <ul class="nav navbar-nav pull-xs-right" *ngIf="!isAuthenticated">
+                <li class="nav-item">
+                    <a [routerLink]="['/auth/signup']" class="nav-link">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="['/auth/signin']" class="nav-link">Sign In</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav pull-xs-right" *ngIf="isAuthenticated">
+                <li class="nav-item" dropdown style="position: relative;">
+                    <a href="" dropdownToggle class="nav-link" role="button" aria-expanded="false">
+                        <span>Settings</span> <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown">
+                        <a class="dropdown-item" [routerLink]="['/user/personal']"><i class="icon-home icon-1x"></i>Personal data</a>
+                        <a class="dropdown-item" [routerLink]="['/user/account']"><i class="icon-home icon-1x"></i>Account</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="" inert (click)="signOut()" class="nav-link">
+                        <span>Signout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>

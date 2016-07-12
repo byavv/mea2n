@@ -183,7 +183,7 @@ describe("User authentication controller unit tests", () => {
                 .expect(200)              
                 .end((err, res) => {
                     expect(res.status).to.be.equal(200);
-                    expect(res.text).to.be.equal("OK");
+                    expect(res.text).to.be.equal("true");
                     expect(revokeStub.called).to.be.equal(true);
                     done();
                 });

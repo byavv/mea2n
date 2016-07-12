@@ -1,40 +1,46 @@
-import {Component, Renderer} from 'angular2/core';
-import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
-import {IdentityService} from "./common/services/services";
-import {Header} from './common/components/header/header.component';
-import {HomeComponent} from './modules/home/components/home.component';
-import {UserProfileModule} from './modules/userprofile/users.module';
-import {AuthorizationModule, AUTH_MODULE} from './modules/authorization/authorization.module';
-import {RestrictedComponent} from './modules/restricted/components/restricted.component';
-import {APP_SERVICES_PROVIDERS} from "./common/services/services";
+import { Component, Renderer, ViewContainerRef } from '@angular/core';
+import { Header } from './shared/components';
+import { IdentityService, Storage, AppController } from "./shared/services";
+import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+
+import '../assets/styles/main.scss';
 
 @Component({
     selector: 'app',
-    directives: [ROUTER_DIRECTIVES, Header],
+    directives: [...ROUTER_DIRECTIVES, Header],
     template: `
-    <div class='container-fluid'>
-       <app-header>
-        </app-header> 
-        <section class="main-content">
-            <router-outlet>
-            </router-outlet>
-        </section>        
+    <div class="page-wrap">
+        <app-header>
+        </app-header>
+        <div class='container-fluid'>             
+            <div class="content-area" [hidden]='!loaded'>
+                <router-outlet>
+                </router-outlet>
+            </div>        
+        </div>
     </div>
-  ` 
+  `
 })
-@RouteConfig([
-    { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/restricted', name: 'Restricted', component: RestrictedComponent, data: { secured: true } },
-    { path: '/user/...', name: 'User', component: UserProfileModule, data: { secured: true } },
-    { path: '/auth/...', name: 'Auth', component: AuthorizationModule, data: { secured: true } },
-    { path: '/**', redirectTo: ['Home'] }
-])
 export class App {
-    constructor(private identity: IdentityService, private renderer: Renderer, router: Router) {
+    loaded: boolean = false;
+    constructor(private appController: AppController,
+        private identity: IdentityService,
+        private renderer: Renderer,
+        router: Router,
+        public viewContainerRef: ViewContainerRef, /* fix for ng2-bootstrap */
+        private storage: Storage) {
         renderer.listenGlobal("window", "storage", (event) => {
             var identityData = JSON.parse(event.newValue);
             identity.update(identityData);
-            router.navigate(['Home']);
+            router.navigate(['/']);
         });
-    }  
+    }
+    ngOnInit() {
+        this.appController.init$.subscribe(defaults => {
+            console.log("APPLICATION STARTED");
+            this.loaded = true;
+        });
+        this.appController.start();
+        this.identity.update(JSON.parse(this.storage.getItem("authorizationData")));
+    }
 }

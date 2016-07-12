@@ -1,3 +1,6 @@
-import {ensureSsl} from'./ensureSsl';
+import {ensureSsl} from './ensureSsl';
+export * from './ensureSsl';
 
-export {ensureSsl}
+export var MIDDLEWARE = [
+    ensureSsl
+];
