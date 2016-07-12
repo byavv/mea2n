@@ -44,24 +44,24 @@ $ npm install
 
 ## Build
 Development build (by default):
-```sh
+```bash
 $ gulp build
 ```
 Production build:
-```sh
+```bash
 $ gulp build --env production                   
 ```
 Build client:
-```sh
+```bash
 $ gulp build:client (--env production)
 ```
 Build server:
-```sh
+```bash
 $ gulp build:server
 ```
 ## Serve/watch
 Builds all and starts server:
-```sh
+```bash
 $ gulp
 ```
 ## Testing
@@ -73,11 +73,11 @@ $ gulp test:server
 $ gulp test:e2e
 
  ```
-       
+
 
 [david-image]: https://david-dm.org/byavv/mea2n.svg
 [david-url]: https://david-dm.org/byavv/mea2n
 [david-dev-image]: https://david-dm.org/byavv/mea2n/dev-status.svg
 [david-dev-url]: https://david-dm.org/byavv/mea2n#info=devDependencies
-[circle-image]: https://circleci.com/gh/byavv/mea2n.svg?style=svg
+[circle-image]: https://circleci.com/gh/byavv/mea2n.svg?style=shield
 [circle-url]: https://circleci.com/gh/byavv/mea2n
