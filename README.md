@@ -13,7 +13,8 @@
 * Server rendering via [angular-universal](https://github.com/angular/universal).
 * Bootstrap 4.
 
- Features:
+#### Features:
+
 * Users management and authentication sample
 * Complete angular2 workflow
 
