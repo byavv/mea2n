@@ -17,7 +17,7 @@ export const routes: RouterConfig = [
      * redirectWhenLogOut:
      *    - when user logs out being on this page, redirect to defined url  
      */
-    data: { permission: ["user"], redirectWhenLogOut: "/" },
+    data: { permission: ["user"], redirectWhenLogOut: "/auth/signin" },
     canActivate: [AuthGuard]
   },
   ...UserProfileRoutes,
