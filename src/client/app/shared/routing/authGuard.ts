@@ -13,17 +13,20 @@ export class AuthGuard implements CanActivate {
     constructor(private permService: PermissionService, private router: Router) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         let permission = route.data["permission"] || ["user"];
-        return Observable.create((observer: Observer<boolean>) => {        
+        return Observable.create((observer: Observer<boolean>) => {
             this.permService
                 .isAuthorized(permission)
                 .map(res => res.json())
+                .do(null, () => {
+                    this.router.navigate(['/auth/signin', { from: state.url }]);
+                })
                 .subscribe(() => {
                     observer.next(true);
                     observer.complete();
                 }, (err) => {
-                    this.router.navigate(['/auth/signin']);
-                    observer.error(err);
-                })
-        })
+                    observer.next(false);
+                    observer.complete();
+                });
+        });
     }
 }

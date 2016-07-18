@@ -1,7 +1,7 @@
-import { Component, Renderer, ViewContainerRef } from '@angular/core';
+import { Component, /*Renderer,*/ ViewContainerRef } from '@angular/core';
 import { Header } from './shared/components';
 import { IdentityService, Storage, AppController } from "./shared/services";
-import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+import { Router, ActivatedRoute, ROUTER_DIRECTIVES } from "@angular/router";
 
 import '../assets/styles/main.scss';
 
@@ -25,15 +25,21 @@ export class App {
     loaded: boolean = false;
     constructor(private appController: AppController,
         private identity: IdentityService,
-        private renderer: Renderer,
-        router: Router,
+      //  private renderer: Renderer,
+      //  router: Router,
+      //  activeRoute: ActivatedRoute,
         public viewContainerRef: ViewContainerRef, /* fix for ng2-bootstrap */
         private storage: Storage) {
-        renderer.listenGlobal("window", "storage", (event) => {
-            var identityData = JSON.parse(event.newValue);
-            identity.update(identityData);
-            router.navigate(['/']);
-        });
+         //   activeRoute.params.subscribe((params)=>{
+        //        console.log(params)
+        //    })
+        // renderer.listenGlobal("window", "storage", (event) => {
+        //     var identityData = JSON.parse(event.newValue);
+        //     identity.update(identityData);
+        //     const redirectUrl = activeRoute.snapshot.params['from'] || '/';
+        //     console.log(activeRoute.snapshot)
+        //     router.navigate([redirectUrl]);
+        // });
     }
     ngOnInit() {
         this.appController.init$.subscribe(defaults => {
