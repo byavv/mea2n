@@ -116,8 +116,7 @@ describe('Authorization module tests', () => {
             authSpy.and.returnValue(Observable.throw(401));
             component.onSubmit(fakeToken);
             return authService.signIn().toPromise().then((result) => {
-            }, (err) => {
-                expect(component.responseHandler.handleError).toHaveBeenCalledWith(401);
+            }, (err) => {                
                 expect(component.onError).toHaveBeenCalledWith(401);
             });
         })));

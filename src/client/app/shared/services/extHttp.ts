@@ -74,7 +74,7 @@ export class ExtHttp {
                     }
                     observer.complete();
                 },
-                (err) => {
+                (err) => {                    
                     if (reqOptions.handle !== false) {
                         observer.error(this.serverHandler.handleError(err));
                     } else {

@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 export class ServerResponseHandler {
     constructor(private router: Router, private identity: IdentityService, private storage: Storage) { }
 
-    public handleError(error: any, allowArrayResult = false): any {
+    public handleError(error: any, allowArrayResult = false): any {       
         let serverMessage;
         switch (error.status) {
             case 401:
