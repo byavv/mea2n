@@ -13,34 +13,25 @@ import '../assets/styles/main.scss';
         <app-header>
         </app-header>
         <div class='container-fluid'>             
-            <div class="content-area" [hidden]='!loaded'>
+            <div class="content-area" [class.hidden]='!loaded'>
                 <router-outlet>
                 </router-outlet>
             </div>        
         </div>
     </div>
-  `
+  `,
+    styles: [`
+    .hidden {
+        display: none;
+    }
+  `]
 })
 export class App {
     loaded: boolean = false;
     constructor(private appController: AppController,
         private identity: IdentityService,
-      //  private renderer: Renderer,
-      //  router: Router,
-      //  activeRoute: ActivatedRoute,
         public viewContainerRef: ViewContainerRef, /* fix for ng2-bootstrap */
-        private storage: Storage) {
-         //   activeRoute.params.subscribe((params)=>{
-        //        console.log(params)
-        //    })
-        // renderer.listenGlobal("window", "storage", (event) => {
-        //     var identityData = JSON.parse(event.newValue);
-        //     identity.update(identityData);
-        //     const redirectUrl = activeRoute.snapshot.params['from'] || '/';
-        //     console.log(activeRoute.snapshot)
-        //     router.navigate([redirectUrl]);
-        // });
-    }
+        private storage: Storage) { }
     ngOnInit() {
         this.appController.init$.subscribe(defaults => {
             console.log("APPLICATION STARTED");
