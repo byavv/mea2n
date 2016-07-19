@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ServerResponseHandler} from "./serverResponseHandler";
-import {IdentityService} from "./identity"
-import {Http, Headers, RequestOptions, RequestOptionsArgs, Response, RequestMethod, Request} from '@angular/http';
-import {Subject, Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ServerResponseHandler } from "./serverResponseHandler";
+import { IdentityService } from "./identity"
+import { Http, Headers, RequestOptions, RequestOptionsArgs, Response, RequestMethod, Request } from '@angular/http';
+import { Subject, Observable, Observer } from 'rxjs';
 
 export enum Action { QueryStart, QueryStop };
 
@@ -51,46 +51,36 @@ export class ExtHttp {
         return this._request(RequestMethod.Delete, url, null, reqOptions);
     }
 
-    private _request(method: RequestMethod, url: string, body?: string, reqOptions?: ExtRequestOptionsArgs): Observable<any> {
+    private _request(method: RequestMethod, url: string, body?: string, reqOptions: ExtRequestOptionsArgs = {}): Observable<any> {
         let requestOptions = new RequestOptions(Object.assign({
             method: method,
             url: url,
             body: body,
-            // by default every request is secured
-            headers: reqOptions && reqOptions.authHeaders !== false ? this._createAuthHeaders() : this._createJsonHeaders()
+            headers: reqOptions.authHeaders !== false ? this._createAuthHeaders() : this._createJsonHeaders()
         }, reqOptions));
 
-        return Observable.create((observer) => {
+        return Observable.create((observer: Observer<any>) => {
             this.process.next(Action.QueryStart);
             this._http.request(new Request(requestOptions))
+                .map((res) => res.json())
                 .finally(() => {
                     this.process.next(Action.QueryStop);
                 })
-                .subscribe(
-                (res) => {
-                    observer.next(res);
+                .subscribe((res) => {
+                    if (reqOptions.handle !== false) {
+                        observer.next(this.serverHandler.handleSuccess(res));
+                    } else {
+                        observer.next(res);
+                    }
                     observer.complete();
                 },
                 (err) => {
-                    // by default responce errors are passed to the serverHandler service
-                    if (reqOptions && reqOptions.handle !== false) {
-                        switch (err.status) {
-                            case 401:
-                                this.serverHandler.handle401();
-                                observer.complete();
-                                break;
-                            case 500:
-                                this.serverHandler.handle500();
-                                observer.complete();
-                                break;
-                            default:
-                                observer.error(err);
-                                break;
-                        }
+                    if (reqOptions.handle !== false) {
+                        observer.error(this.serverHandler.handleError(err));
                     } else {
                         observer.error(err);
                     }
-                })
-        })
+                });
+        });
     }
 }

@@ -51,9 +51,9 @@ export class PersonalComponent implements OnInit {
                 err => this.onError(err))
         }
     }
-    onSuccess(data) {
+    onSuccess(info) {
         this.error = null;
-        this.info = this.responseHandler.handleSuccess(data);
+        this.info = info;
     }
     onError(err) {
         this.info = null;

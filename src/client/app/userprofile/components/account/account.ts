@@ -58,14 +58,14 @@ export class AccountComponent implements OnInit {
         }
     }
 
-    onSuccess(data) {
+    onSuccess(info) {
         this.error = null;
-        this.info = this.responseHandler.handleSuccess(data);
+        this.info = info;
     }
 
     onError(err) {
         this.info = null;
-        this.error = this.responseHandler.handleError(err);
+        this.error = err;
     }
 
     closeAlert() {

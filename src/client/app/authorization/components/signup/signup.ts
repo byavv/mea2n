@@ -66,7 +66,7 @@ export class SignUpComponent {
     }
 
     onError(err) {
-        this.error = this.responseHandler.handleError(err);
+        this.error = err;
     }
 
     closeAlert() {
