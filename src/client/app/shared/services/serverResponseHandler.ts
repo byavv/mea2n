@@ -23,7 +23,7 @@ export class ServerResponseHandler {
                 serverMessage = "Unexpected server error";
                 break;
             default:
-                serverMessage = this._getMessage(error.message, allowArrayResult);
+                serverMessage = this._getMessage(error, allowArrayResult);
                 break;
         }
         return serverMessage;
