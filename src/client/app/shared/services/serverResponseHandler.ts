@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 export class ServerResponseHandler {
     constructor(private router: Router, private identity: IdentityService, private storage: Storage) { }
 
-    public handleError(error: any, allowArrayResult = false): any {       
+    public handleError(error: any, allowArrayResult = false): any {
         let serverMessage;
         switch (error.status) {
             case 401:
@@ -23,17 +23,18 @@ export class ServerResponseHandler {
                 serverMessage = "Unexpected server error";
                 break;
             default:
-                serverMessage = this._getMessage(error.message, allowArrayResult);
+                serverMessage = this._getMessage(error.json(), allowArrayResult);
                 break;
         }
         return serverMessage;
     }
 
     public handleSuccess(result): any {
-        if (result.key) {
-            return this._getMessage(result);
+        let res = result.json();
+        if (res.key) {
+            return this._getMessage(res);
         } else {
-            return result;
+            return res;
         }
     }
 

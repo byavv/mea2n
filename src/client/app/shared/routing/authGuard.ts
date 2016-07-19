@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
         return Observable.create((observer: Observer<boolean>) => {
             this.permService
                 .isAuthorized(permission)
+                .map((res)=>res.json())
                 .toPromise()
                 .then(result => {                    
                     isBoolean(result) ? observer.next(result) : observer.next(false);
