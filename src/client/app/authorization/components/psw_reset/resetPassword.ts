@@ -34,8 +34,8 @@ export class ResetPasswordComponent {
             (err) => this.onError(err));
     }
 
-    onSuccess(data) {
-        this.info = this.responseHandler.handleSuccess(data);
+    onSuccess(info) {
+        this.info = info;
         this.countdown = true;
         var timer = setInterval(() => {
             if (this.redirectTime == 0) {

@@ -5,12 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class BackEndApi {
-  
-
-    constructor(private _http: Http) {
-      
-    }
-
+    constructor(private _http: Http) {}
     public loadDefaults(): Observable<any> {
         return this._http
             .get("/app/defaults")

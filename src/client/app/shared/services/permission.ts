@@ -7,7 +7,7 @@ export class PermissionService {
     constructor(private _http: ExtHttp) { }
     isAuthorized(roles): Observable<any> {
         return this._http
-            .post("/auth/me", JSON.stringify({ roles: roles }))
+            .post("/auth/me", JSON.stringify({ roles: roles }), { handle: false })
     }
 }
 

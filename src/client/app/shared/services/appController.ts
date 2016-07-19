@@ -7,9 +7,7 @@ import { ReplaySubject, Observable } from "rxjs";
 export class AppController {
     _init$: ReplaySubject<any> = new ReplaySubject<any>();
 
-    config: any = {
-        apiBase: "https://localhost:3001" //todo get from data
-    };
+    config: any = {}
 
     constructor(private _backEnd: BackEndApi, private _ngZone: NgZone) { }
     start() {
@@ -26,12 +24,12 @@ export class AppController {
 
     private _loadAppDefaults(doneCallback: (config: any) => void) {
         Observable.zip(
-            // load app config from backend 
-             this._backEnd.loadDefaults(),          
+            // load app config
+            this._backEnd.loadDefaults(),
             (config) => config
         )
             .subscribe(value => {
                 doneCallback(value);
-            }, console.error)
+            }, console.error);
     }
 }

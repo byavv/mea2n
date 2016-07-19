@@ -16,7 +16,7 @@ import {App} from '../../app';
 import {provide, ApplicationRef, Component, PLATFORM_DIRECTIVES } from '@angular/core';
 
 import { REACTIVE_FORM_DIRECTIVES, FormBuilder, provideForms, disableDeprecatedForms } from '@angular/forms';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { By } from '@angular/platform-browser';
 
 import {
@@ -49,6 +49,15 @@ describe('Authorization module tests', () => {
     class MockRouter {
         navigate(value) { }
     }
+    class MockActivatedRouter {
+        get snapshot() {
+            return {
+                params: {
+                    from: '/test'
+                }
+            }
+        }
+    }
     class MockResponseHandler {
         handleError(er) { return er.toString() }
     }
@@ -60,6 +69,8 @@ describe('Authorization module tests', () => {
             provideForms(),
             APP_SERVICES_PROVIDERS,
             provide(Router, { useFactory: () => new MockRouter() }),
+            provide(ActivatedRoute, { useFactory: () => new MockActivatedRouter() }),
+            // provide activated router
             provide(IdentityService, { useFactory: () => new MockIdentityService() }),
             provide(AuthApiService, { useFactory: () => new MockAuthService() }),
             provide(ServerResponseHandler, { useClass: MockResponseHandler }),
@@ -105,8 +116,7 @@ describe('Authorization module tests', () => {
             authSpy.and.returnValue(Observable.throw(401));
             component.onSubmit(fakeToken);
             return authService.signIn().toPromise().then((result) => {
-            }, (err) => {
-                expect(component.responseHandler.handleError).toHaveBeenCalledWith(401);
+            }, (err) => {                
                 expect(component.onError).toHaveBeenCalledWith(401);
             });
         })));

@@ -1,5 +1,5 @@
-import {Inject, OpaqueToken, provide} from '@angular/core';
-import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
+import { Inject, OpaqueToken, provide } from '@angular/core';
+import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
 
 export const localStorageBackend = new OpaqueToken('localStorageBackend');
 

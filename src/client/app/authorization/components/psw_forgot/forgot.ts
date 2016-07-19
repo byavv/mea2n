@@ -25,13 +25,13 @@ export class ForgotComponent {
             (err) => this.onError(err));
     }
 
-    onSuccess(data) {
-        this.info = this.responseHandler.handleSuccess(data);
+    onSuccess(info) {
+        this.info = info;
         this.error = null;
     }
 
     onError(err) {
-        this.error = this.responseHandler.handleError(err);
+        this.error = err;
         this.info = null;
     }
 
