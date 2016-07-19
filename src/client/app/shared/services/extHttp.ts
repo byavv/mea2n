@@ -61,13 +61,14 @@ export class ExtHttp {
 
         return Observable.create((observer: Observer<any>) => {
             this.process.next(Action.QueryStart);
-            this._http.request(new Request(requestOptions))              
+            this._http.request(new Request(requestOptions))
+               // .map((res) => res.json())
                 .finally(() => {
                     this.process.next(Action.QueryStop);
                 })
                 .subscribe((res: Response) => {
                     if (reqOptions.handle !== false) {
-                        observer.next(this.serverHandler.handleSuccess(res.json()));
+                        observer.next(this.serverHandler.handleSuccess(res));
                     } else {
                         observer.next(res);
                     }
@@ -75,7 +76,7 @@ export class ExtHttp {
                 },
                 (err) => {
                     if (reqOptions.handle !== false) {
-                        observer.error(this.serverHandler.handleError(err.json()));
+                        observer.error(this.serverHandler.handleError(err));
                     } else {
                         observer.error(err);
                     }
