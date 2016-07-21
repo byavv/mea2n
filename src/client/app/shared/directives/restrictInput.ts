@@ -25,15 +25,17 @@ export class RestrictInput {
         this.nopaste = nopaste != null;
         this.regex = '[A-Za-z0-9]'; //default
     }
-    onKeydown(event: any) {
-        if (this.expression && !this.expression.test(StringWrapper.fromCharCode(event.keyCode))) {
+    
+    onKeydown(event: any) {       
+        if (this.expression && !this.expression.test(StringWrapper.fromCharCode(event.keyCode || event.charCode))) {
             this.renderer.setElementStyle(this.element.nativeElement, "background", "indianred")
             setTimeout(() => {
                 this.renderer.setElementStyle(this.element.nativeElement, "background", "white")
             }, 150)
-            event.preventDefault();
+            event.preventDefault();          
         }
     }
+
     onPaste(event) {
         if (this.nopaste) {
             event.preventDefault();
