@@ -23,17 +23,4 @@
   .psw input[type="password"] {
     padding-right: 30px;
   }
-
-  .psw-danger  svg path {
-    animation: tada 0.5s linear both;
-    fill: #a3000a;
-  }
-  .psw-good  svg path {
-    animation: pulse 0.5s linear both;
-    fill: #EE7B00;
-  }
-  .psw-strong  svg path {
-    animation: pulse 0.5s linear both;
-    fill: #267c1d;
-  }
   

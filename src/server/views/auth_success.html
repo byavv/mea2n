@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>github authentication</title>       
-        <base href="/">
-    </head>
-    <body>
-        <script type="text/javascript">
+
+<head>
+    <meta charset="UTF-8">
+    <title>github authentication</title>
+    <base href="/">
+</head>
+
+<body>
+    <script type="text/javascript">
             var identityData = {{:identityData}};     
             if(!!identityData){                
                 window.focus();
@@ -22,5 +24,6 @@
                 location.href = "/auth/error";
             }
         </script>
-    </body>
+</body>
+
 </html>

@@ -2,10 +2,6 @@ import { Component } from '@angular/core'
 
 @Component({
     selector: 'secured',
-    template: require('./secured.html'),
-    directives: []
+    template: require('./secured.html')
 })
-export class SecuredPageComponent {
-    constructor() { }    
-}
-
+export class SecuredPageComponent {}
